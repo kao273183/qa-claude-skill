@@ -1,5 +1,48 @@
 # Changelog
 
+## v1.1.0 — 2026-05-21
+
+### Added
+
+- 🧪 **Built-in config validator** (`scripts/validate-config.sh`)
+  - 7 階段校驗：JSON syntax → 必填欄位 → Enum 值 → Pattern → Mode 一致性 → 跨欄位依賴 → 選填欄位提示
+  - 整合進 `install.sh`，安裝前先過 validator
+  - 也可獨立使用：`./scripts/validate-config.sh [config-path]`
+  - 退出碼：0 = 通過、1 = 失敗、2 = usage error
+  - 彩色輸出 + 詳細錯誤訊息（含修正提示）
+
+- 📦 **3 個新場景 presets**
+  - `startup.json` — 小型新創（< 10 人），Web 啟用、Slack channel only、BE pytest off
+  - `enterprise.json` — 大型企業 + 5 個 team boards、4 瀏覽器、三方審查啟用、AWS S3 dashboard、BE pytest + mutation + property test 全套
+  - `government.json` — 政府/金融/醫療高合規場景、預設 markdown-only、強制 a11y、on-prem JIRA、無 Slack / Google / AWS
+
+- 🌐 **Web 平台支援**（自 4 個 skill 擴充）
+  - test-master：Web 平台偵測 + Web 測試類型表（E2E / Component / Visual / Cross-browser / Responsive / API）
+  - test-automation：新增 `web-patterns.md`（610 行）支援 4 種框架（Playwright / Cypress / Selenium / Vitest）
+  - test-review：code-patterns 加 TypeScript 範例（Playwright / Cypress / Vitest）+ Web 專屬 anti-patterns 4 種
+  - regression-test：平台 dropdown 加 Web / Web (Chrome) / Web (Safari) / All
+
+- 📚 **4 篇中文概念入門導讀**
+  - `property-based-test-gen/concept-zh.md`
+  - `mutation-testing/concept-zh.md`
+  - `speckit-to-tc/concept-zh.md`
+  - `smoke-test-analyzer/concept-zh.md`
+
+- 📝 **README 改寫**
+  - 改為英文主版 + `README.zh-TW.md` 繁中可切換
+  - 加 5 個 shields.io badges
+  - 風格參考 mk-qa-master
+
+### Changed
+
+- `install.sh` 把校驗邏輯抽到獨立 `scripts/validate-config.sh`（保留 inline 簡化版 fallback）
+
+### Fixed
+
+- N/A
+
+---
+
 ## v1.0.0 — 2026-05-21
 
 首版發布。從個人 QA workspace 抽離出的通用版本。

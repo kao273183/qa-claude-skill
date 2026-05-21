@@ -44,24 +44,35 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
   fi
 fi
 
-# ---- Validate required fields ----
-log "Validating config.json ..."
-REQUIRED_FIELDS=(
-  ".jira.instance_url"
-  ".jira.project_key"
-  ".platforms.ios.default_device"
-  ".platforms.android.default_device"
-)
-MISSING=0
-for f in "${REQUIRED_FIELDS[@]}"; do
-  val=$(jq -r "$f // empty" "$CONFIG_FILE")
-  if [[ -z "$val" ]]; then
-    err "Missing required field: $f"
-    MISSING=$((MISSING + 1))
+# ---- Validate config (delegated to scripts/validate-config.sh) ----
+VALIDATOR="$SCRIPT_DIR/scripts/validate-config.sh"
+if [[ -x "$VALIDATOR" ]]; then
+  log "Validating config.json (delegating to scripts/validate-config.sh) ..."
+  if ! "$VALIDATOR" "$CONFIG_FILE"; then
+    err "Config validation failed. Fix the errors above and re-run."
+    exit 1
   fi
-done
-[[ $MISSING -gt 0 ]] && { err "Fix config.json and re-run."; exit 1; }
-ok "config.json passes required-field check"
+  echo ""
+else
+  # Inline minimal check if scripts/validate-config.sh missing
+  log "Validating config.json (inline minimal check) ..."
+  REQUIRED_FIELDS=(
+    ".jira.instance_url"
+    ".jira.project_key"
+    ".platforms.ios.default_device"
+    ".platforms.android.default_device"
+  )
+  MISSING=0
+  for f in "${REQUIRED_FIELDS[@]}"; do
+    val=$(jq -r "$f // empty" "$CONFIG_FILE")
+    if [[ -z "$val" ]]; then
+      err "Missing required field: $f"
+      MISSING=$((MISSING + 1))
+    fi
+  done
+  [[ $MISSING -gt 0 ]] && { err "Fix config.json and re-run."; exit 1; }
+  ok "config.json passes minimal check"
+fi
 
 # Warn about optional but commonly used fields
 OPTIONAL_FIELDS=(

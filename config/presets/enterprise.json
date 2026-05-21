@@ -1,0 +1,138 @@
+{
+  "$schema": "../config.schema.json",
+  "$comment": "Preset: enterprise — 大型企業（> 100 人）。完整 Atlassian + Slack + Google Workspace + AWS dashboard，有 BE Python pytest，啟用三方審查。",
+
+  "mode": "full-mcp",
+
+  "jira": {
+    "instance_url": "https://acme-enterprise.atlassian.net",
+    "project_key": "ENT",
+    "bug_issue_type_id": "10046",
+    "reviewer_account_id": "5fb87654321abc",
+    "reviewer_field": "customfield_10045",
+    "boards": [
+      { "name": "iOS-Team", "board_id": "201", "team_id": "ios-uuid", "scope": "iOS native" },
+      { "name": "Android-Team", "board_id": "202", "team_id": "android-uuid", "scope": "Android native" },
+      { "name": "Web-Team", "board_id": "203", "team_id": "web-uuid", "scope": "Web frontend" },
+      { "name": "Backend-Team", "board_id": "204", "team_id": "be-uuid", "scope": "Backend APIs" },
+      { "name": "Infra-Team", "board_id": "205", "team_id": "infra-uuid", "scope": "Platform / DevOps" }
+    ],
+    "priority_mapping": {
+      "Blocker": "Highest",
+      "Critical": "High",
+      "Major": "Medium",
+      "Minor": "Low"
+    }
+  },
+
+  "slack": {
+    "user_id": "U01ABCDEF",
+    "bug_channel_id": "C01BUGS",
+    "release_channel_id": "C01RELEASE",
+    "notification_rules": {
+      "bug_report": ["dm", "channel"],
+      "tc_review_complete": ["dm"],
+      "regression_published": ["channel"],
+      "tc_version_diff": ["channel"]
+    }
+  },
+
+  "google": {
+    "tc_template_id": "1ENT_TC_TEMPLATE_ID",
+    "qa_tc_folder_id": "1ENT_QA_TC_FOLDER",
+    "release_schedule_id": "1ENT_RELEASE_SCHEDULE",
+    "regression_template_id": "1ENT_REGRESSION_TEMPLATE",
+    "default_drive": "shared"
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone 15 Pro",
+      "default_os_version": "iOS 17.5",
+      "min_os_version": "iOS 16.0",
+      "repo": "acme/ios-app",
+      "release_branch_pattern": "release/{version}",
+      "version_file": "**/Info.plist"
+    },
+    "android": {
+      "default_device": "Pixel 8",
+      "default_os_version": "Android 14",
+      "min_api_level": 28,
+      "repo": "acme/android-app",
+      "release_tag_pattern": "v{version}",
+      "version_file": "**/build.gradle"
+    },
+    "web": {
+      "enabled": true,
+      "repo": "acme/web-app",
+      "default_browsers": ["chrome", "safari", "firefox", "edge"],
+      "frameworks": {
+        "primary": "playwright",
+        "component_test": "playwright-component",
+        "visual_regression": "percy"
+      },
+      "viewport_sizes": {
+        "desktop": "1920x1080",
+        "tablet": "768x1024",
+        "mobile": "375x667"
+      },
+      "base_url_envs": {
+        "uat": "https://uat.acme.com",
+        "staging": "https://staging.acme.com",
+        "production": "https://www.acme.com"
+      }
+    },
+    "flutter": { "enabled": false }
+  },
+
+  "backend": {
+    "pytest_enabled": true,
+    "pytest_project_root": "/opt/acme/pytest-api-kit",
+    "schema_dsl": "pydantic",
+    "feature_modules": ["auth", "payment", "billing", "notification", "analytics"],
+    "mutation": { "enabled": true, "score_target": 80, "critical_score_target": 95 },
+    "property_based": { "enabled": true, "default_max_examples": 200, "ci_max_examples": 100, "thorough_max_examples": 1000 }
+  },
+
+  "speckit": {
+    "enabled": true,
+    "repo_root": "/opt/acme/spec-repo",
+    "feature_routing": [
+      { "keywords": ["auth", "login", "sso"], "path": "auth/", "epic": "ENT-1000" },
+      { "keywords": ["payment", "checkout"], "path": "payment/", "epic": "ENT-2000" },
+      { "keywords": ["billing", "invoice"], "path": "billing/", "epic": "ENT-3000" }
+    ]
+  },
+
+  "publish_regression": {
+    "enabled": true,
+    "html_generator_script": "/opt/acme/qa-scripts/generate_manual_html.py",
+    "index_generator_script": "/opt/acme/qa-scripts/generate_index_html.py",
+    "report_pipeline": {
+      "type": "s3_cloudfront",
+      "s3_bucket": "acme-qa-reports",
+      "s3_region": "us-east-1",
+      "s3_prefix": "regression/",
+      "cloudfront_distribution_id": "EACMEXXXXX",
+      "dashboard_url": "https://qa.acme.com/index.html",
+      "report_url_template": "https://qa.acme.com/{prefix}manual-{env}-{version}/{timestamp}/report.html"
+    },
+    "default_env": "uat"
+  },
+
+  "review_protocol": {
+    "tri_party_enabled": true,
+    "$comment_tri_party": "企業重要交付啟用三方審查（Claude + Codex + Gemini）增加客觀性",
+    "reviewers": ["claude", "codex", "gemini"],
+    "dimensions": 10,
+    "max_score_per_dimension": 5
+  },
+
+  "language": { "primary": "en", "secondary": "zh-TW" },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": true,
+    "auto_root_cause_depth": { "ios": "deep", "android": "deep" }
+  }
+}

@@ -86,12 +86,34 @@ open /tmp/preview/test-master/SKILL.md
 ### 想用既有 preset 而非自寫 config
 
 ```bash
-cp config/presets/full-stack.json config/config.json    # 大團隊
-cp config/presets/jira-only.json config/config.json     # 只 JIRA
-cp config/presets/markdown-only.json config/config.json # 純文件
+# 工具棧 presets
+cp config/presets/full-stack.json     config/config.json   # 大團隊（JIRA + Slack + Google）
+cp config/presets/jira-only.json      config/config.json   # 只 JIRA
+cp config/presets/markdown-only.json  config/config.json   # 純文件
+
+# 場景 presets (v1.1.0+)
+cp config/presets/startup.json        config/config.json   # 新創團隊 < 10 人
+cp config/presets/enterprise.json     config/config.json   # 大型企業 + 5 個 team boards
+cp config/presets/government.json     config/config.json   # 政府 / 高合規 / on-prem
 ```
 
 然後再填入專屬 ID 即可。
+
+### 校驗 config（不安裝）
+
+```bash
+./scripts/validate-config.sh                              # 驗 config/config.json
+./scripts/validate-config.sh config/presets/startup.json  # 驗指定檔案
+```
+
+校驗器會檢查：
+- JSON syntax
+- 必填欄位
+- Enum 值（mode / default_drive / language.primary / report_pipeline.type）
+- Pattern 規則（project_key 全大寫 / reviewer_field 是 customfield_NNNNN / URL 格式）
+- Mode 一致性（markdown-only 應無 IDs / full-mcp 應有 IDs）
+- 跨欄位依賴（mutation 需要 pytest / publish s3_cloudfront 需要 bucket）
+- 選填但建議的欄位
 
 ### 我已經用過個人版（含 UOP 等硬編碼），怎麼遷移？
 

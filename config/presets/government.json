@@ -1,0 +1,88 @@
+{
+  "$schema": "../config.schema.json",
+  "$comment": "Preset: government — 政府 / 金融 / 醫療 等高合規場景。on-prem 為主、不能用雲端服務、需要可審計記錄。預設 markdown-only 模式（所有產出留檔），可選擇性啟用 on-prem JIRA。",
+
+  "mode": "markdown-only",
+  "$comment_mode": "政府專案常需要所有產出留檔可審計，markdown-only 模式產出 .md 比 Sheet 更易封存",
+
+  "jira": {
+    "instance_url": "https://jira.your-gov.gov.tw",
+    "project_key": "GOV",
+    "$comment": "on-prem JIRA Server 也支援；URL 可改 https 或 http",
+    "bug_issue_type_id": "10046",
+    "reviewer_field": "customfield_10045"
+  },
+
+  "slack": {
+    "user_id": "",
+    "$comment_slack": "政府專案通常不能用公開 Slack；可留空或改用內部 Mattermost / Rocket.Chat",
+    "notification_rules": {
+      "bug_report": [],
+      "tc_review_complete": [],
+      "regression_published": []
+    }
+  },
+
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": "",
+    "$comment_google": "政府專案常禁止用 Google Workspace；TC 寫在本地 .md 經審查後上 on-prem 文件系統"
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone (latest)",
+      "default_os_version": "iOS (latest)",
+      "min_os_version": "iOS 16.0",
+      "$comment_min": "政府專案合規要求至少支援最近 2 個 iOS 主版本"
+    },
+    "android": {
+      "default_device": "Pixel (latest)",
+      "default_os_version": "Android (latest)",
+      "min_api_level": 28,
+      "$comment_api": "Android 9（API 28）— 安全漏洞修補仍在維護的最低版本"
+    },
+    "web": {
+      "enabled": true,
+      "default_browsers": ["chrome", "safari", "firefox", "edge"],
+      "$comment_browsers": "政府網站要支援 4 大瀏覽器（含弱勢族群常用配置）",
+      "frameworks": {
+        "primary": "playwright",
+        "$comment_primary": "Playwright 多瀏覽器跑 + 開源（沒授權成本）"
+      },
+      "viewport_sizes": {
+        "desktop": "1920x1080",
+        "tablet": "768x1024",
+        "mobile": "375x667"
+      }
+    },
+    "flutter": { "enabled": false }
+  },
+
+  "backend": {
+    "pytest_enabled": false,
+    "$comment_be": "政府專案 BE 多為 Java / .NET / Go；本套件 BE 系列 skill 為 Python，可暫關"
+  },
+
+  "publish_regression": {
+    "enabled": false,
+    "$comment_publish": "政府專案禁止 AWS S3 / CloudFront；改用 on-prem 文件系統手動分發"
+  },
+
+  "review_protocol": {
+    "tri_party_enabled": false,
+    "$comment_review": "政府專案審查通常需人工簽核，AI 三方審查作參考不取代"
+  },
+
+  "language": {
+    "primary": "zh-TW",
+    "secondary": "en"
+  },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": true,
+    "$comment_a11y": "政府 / 金融 / 醫療 必須符合 WCAG AA，a11y 強制啟用",
+    "auto_root_cause_depth": { "ios": "deep", "android": "deep" }
+  }
+}

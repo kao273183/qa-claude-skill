@@ -222,11 +222,11 @@ skills/<skill-name>/
 
 ## 🗺 Roadmap
 
+- [x] ~~內建 schema 校驗~~ — 已於 v1.1.0 用 `scripts/validate-config.sh` 完成
+- [x] ~~更多 preset：新創 / 企業 / 政府~~ — 已於 v1.1.0 完成
 - [ ] Windows 原生支援（目前需用 WSL）
 - [ ] CI/CD pipeline 整合範本（GitHub Actions / GitLab / CircleCI）
-- [ ] 內建 `ajv-cli` schema 校驗
 - [ ] 多語言擴充：日本語 / 简体中文
-- [ ] 更多 preset：新創 / 企業 / 政府
 - [ ] Config 編輯 Web UI
 - [ ] Skill 遙測（匿名統計，優化預設值）
 

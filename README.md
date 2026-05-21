@@ -222,11 +222,11 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 
 ## 🗺 Roadmap
 
+- [x] ~~Built-in schema validation~~ — done in v1.1.0 via `scripts/validate-config.sh`
+- [x] ~~More presets: startup / enterprise / government~~ — done in v1.1.0
 - [ ] Windows native support (currently requires WSL)
 - [ ] CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)
-- [ ] Built-in schema validation via `ajv-cli`
 - [ ] More language support: 日本語 / 简体中文
-- [ ] More presets: startup / enterprise / government
 - [ ] Web UI for config editing
 - [ ] Skill telemetry (anonymous usage stats to improve defaults)
 

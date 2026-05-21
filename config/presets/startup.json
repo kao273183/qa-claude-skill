@@ -1,0 +1,78 @@
+{
+  "$schema": "../config.schema.json",
+  "$comment": "Preset: startup — 小型新創團隊（< 10 人）。可能用 Linear / GitHub Issues 代替 JIRA，Slack 為主要通訊，沒 BE pytest 規模。",
+
+  "mode": "partial-mcp",
+
+  "jira": {
+    "instance_url": "https://your-startup.atlassian.net",
+    "project_key": "STARTUP",
+    "bug_issue_type_id": "10046",
+    "reviewer_field": "customfield_10045",
+    "boards": [
+      { "name": "Main", "board_id": "1", "scope": "All features" }
+    ]
+  },
+
+  "slack": {
+    "user_id": "",
+    "bug_channel_id": "",
+    "notification_rules": {
+      "bug_report": ["channel"],
+      "tc_review_complete": [],
+      "regression_published": ["channel"]
+    }
+  },
+
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": "",
+    "default_drive": "personal",
+    "$comment_default_drive": "新創 Google Workspace 用個人 drive 就夠"
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone 15 Pro",
+      "default_os_version": "iOS 17.5",
+      "min_os_version": "iOS 16.0"
+    },
+    "android": {
+      "default_device": "Pixel 8",
+      "default_os_version": "Android 14",
+      "min_api_level": 28
+    },
+    "web": {
+      "enabled": true,
+      "default_browsers": ["chrome"],
+      "$comment_browsers": "新創資源有限，先測 Chrome",
+      "frameworks": {
+        "primary": "playwright"
+      }
+    },
+    "flutter": { "enabled": false }
+  },
+
+  "backend": {
+    "pytest_enabled": false,
+    "$comment_pytest": "新創 BE 規模小，先用 pytest example test 即可；mutation / property-based 之後再說"
+  },
+
+  "publish_regression": {
+    "enabled": false,
+    "$comment": "新創不一定有 S3 dashboard，先用 local_html 或跳過"
+  },
+
+  "review_protocol": {
+    "tri_party_enabled": false,
+    "$comment": "新創團隊小，單方 Claude 審查就夠"
+  },
+
+  "language": { "primary": "en", "secondary": "zh-TW" },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": false,
+    "$comment_a11y": "新創早期可暫不強制 a11y，但要在 Roadmap 內安排"
+  }
+}
