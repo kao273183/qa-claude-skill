@@ -43,7 +43,7 @@
 
 | Skill | Purpose |
 |-------|---------|
-| [`test-master`](skills/test-master/) | Full test plan + black-box/white-box TC generation (native iOS/Android) |
+| [`test-master`](skills/test-master/) | Full test plan + black-box/white-box TC generation (native iOS/Android + **Web**) |
 | [`flutter-test-master`](skills/flutter-test-master/) | Flutter 3-tier pyramid (Unit/Widget/Integration) + Golden + Platform Channel |
 | [`test-review`](skills/test-review/) | TC + code review on 10 weighted dimensions; supports Swift/Kotlin/Dart/Python |
 | [`regression-test`](skills/regression-test/) | Release-level cross-platform regression plans (JIRA + historical bug analysis) |
@@ -56,7 +56,7 @@
 
 | Skill | Purpose |
 |-------|---------|
-| [`test-automation`](skills/test-automation/) | iOS (Swift Testing + XCUITest) / Android (JUnit + Espresso + Mockk) script generation |
+| [`test-automation`](skills/test-automation/) | iOS (Swift Testing + XCUITest) / Android (JUnit + Espresso + Mockk) / **Web (Playwright + Cypress + Selenium/WebdriverIO + Vitest)** script generation |
 | [`flutter-test-automation`](skills/flutter-test-automation/) | Dart automation scripts (flutter_test / integration_test / Patrol / Golden) |
 | [`tc-to-pytest`](skills/tc-to-pytest/) | White-box API TC → pytest-api-kit triplet (`schemas.py` + `conftest.py` + `tests/test_*_api.py`) |
 

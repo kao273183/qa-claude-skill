@@ -43,7 +43,7 @@
 
 | Skill | 用途 |
 |-------|------|
-| [`test-master`](skills/test-master/) | 完整測試計劃 + 黑箱/白箱 TC 生成（原生 iOS/Android）|
+| [`test-master`](skills/test-master/) | 完整測試計劃 + 黑箱/白箱 TC 生成（原生 iOS/Android + **Web**）|
 | [`flutter-test-master`](skills/flutter-test-master/) | Flutter 三層測試金字塔（Unit/Widget/Integration）+ Golden + Platform Channel |
 | [`test-review`](skills/test-review/) | TC + 程式碼審查（10 維度加權評分）；支援 Swift/Kotlin/Dart/Python |
 | [`regression-test`](skills/regression-test/) | Release 級跨平台回歸測試計劃（JIRA + 歷史 Bug 分析）|
@@ -56,7 +56,7 @@
 
 | Skill | 用途 |
 |-------|------|
-| [`test-automation`](skills/test-automation/) | iOS（Swift Testing + XCUITest）/ Android（JUnit + Espresso + Mockk）腳本生成 |
+| [`test-automation`](skills/test-automation/) | iOS（Swift Testing + XCUITest）/ Android（JUnit + Espresso + Mockk）/ **Web（Playwright + Cypress + Selenium/WebdriverIO + Vitest）** 腳本生成 |
 | [`flutter-test-automation`](skills/flutter-test-automation/) | Dart 自動化腳本（flutter_test / integration_test / Patrol / Golden）|
 | [`tc-to-pytest`](skills/tc-to-pytest/) | 白箱 API TC → pytest-api-kit 三件套（`schemas.py` + `conftest.py` + `tests/test_*_api.py`）|
 

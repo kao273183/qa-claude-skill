@@ -74,6 +74,37 @@
       "enabled": false,
       "repo": "your-org/your-flutter-repo",
       "min_dart_sdk": "3.0.0"
+    },
+    "web": {
+      "enabled": false,
+      "repo": "your-org/your-web-repo",
+      "default_browsers": ["chrome", "safari"],
+      "$comment_default_browsers": "chrome | safari | firefox | edge — smoke 測試的預設瀏覽器組合",
+      "supported_browsers": ["chrome", "safari", "firefox", "edge"],
+      "min_browser_versions": {
+        "chrome": "latest-2",
+        "safari": "latest-1",
+        "firefox": "latest-2",
+        "edge": "latest-2"
+      },
+      "frameworks": {
+        "primary": "playwright",
+        "$comment_primary": "playwright | cypress | selenium | webdriverio — 主要 E2E 框架",
+        "component_test": "playwright-component",
+        "$comment_component_test": "playwright-component | cypress-component | none",
+        "visual_regression": "playwright-snapshot",
+        "$comment_visual_regression": "playwright-snapshot | percy | chromatic | none"
+      },
+      "viewport_sizes": {
+        "desktop": "1920x1080",
+        "tablet": "768x1024",
+        "mobile": "375x667"
+      },
+      "base_url_envs": {
+        "uat": "https://uat.example.com",
+        "staging": "https://staging.example.com",
+        "production": "https://example.com"
+      }
     }
   },
 

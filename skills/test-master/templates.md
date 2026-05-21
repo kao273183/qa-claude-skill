@@ -30,18 +30,22 @@
 
 ## 平台實作比對
 
-| 功能點 | iOS 實作 | Android 實作 | 差異/風險 |
-|--------|---------|-------------|----------|
-| [功能 1] | [檔案/類別] | [檔案/類別] | [差異說明] |
-| [功能 2] | [檔案/類別] | [檔案/類別] | [差異說明] |
+| 功能點 | iOS 實作 | Android 實作 | Web 實作 | 差異/風險 |
+|--------|---------|-------------|---------|----------|
+| [功能 1] | [檔案/類別] | [檔案/類別] | [Component/Route] | [差異說明] |
+| [功能 2] | [檔案/類別] | [檔案/類別] | [Component/Route] | [差異說明] |
+
+> Web 欄位僅在 `platforms.web.enabled = true` 時填入。
 
 ## 測試金字塔分配
 
-| 層級 | 比例 | iOS 測試內容 | Android 測試內容 |
-|------|------|-------------|-----------------|
-| Unit | 70% | ViewModel, Repository, UseCase | ViewModel, Repository, UseCase |
-| Integration | 20% | API 整合, SDK 整合 | API 整合, SDK 整合 |
-| UI | 10% | 關鍵流程 E2E | 關鍵流程 E2E |
+| 層級 | 比例 | iOS 測試內容 | Android 測試內容 | Web 測試內容 |
+|------|------|-------------|-----------------|---------------|
+| Unit | 70% | ViewModel, Repository, UseCase | ViewModel, Repository, UseCase | Pure functions, Hooks, Utils |
+| Integration | 20% | API 整合, SDK 整合 | API 整合, SDK 整合 | Component test, MSW mocks |
+| UI / E2E | 10% | 關鍵流程 XCUITest | 關鍵流程 Espresso | Playwright / Cypress E2E |
+
+> Web 跨瀏覽器要求：E2E 至少跑 `platforms.web.default_browsers` 中列出的 browsers（預設 Chrome + Safari）。
 
 ## 風險矩陣
 

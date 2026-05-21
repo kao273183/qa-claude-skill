@@ -16,11 +16,15 @@ argument-hint: "[JIRA票號 或 功能描述]"
 ### Phase 1: 需求分析
 1. **讀取需求** — JIRA 票號（如 `{{JIRA_PROJECT_KEY}}-XXXX`）用 Atlassian MCP 抓取，否則請使用者描述
 2. **JIRA 描述完整性檢查** — description 為空的票號標記為風險
-3. **分析影響範圍** — 搜尋相關程式碼（Glob/Grep）：
-   - iOS repo: `{{IOS_REPO}}`（若已設定）
-   - Android repo: `{{ANDROID_REPO}}`（若已設定）
+3. **平台偵測** — 自動偵測涵蓋哪些平台：
+   - iOS：`*.xcodeproj` / `Package.swift` → 用 `{{IOS_REPO}}`
+   - Android：`build.gradle(.kts)` → 用 `{{ANDROID_REPO}}`
+   - Web：`package.json` / `next.config.*` / `vite.config.*` / `webpack.config.*` → 用 `{{WEB_REPO}}`（若 `platforms.web.enabled = true`）
+   - Flutter：`pubspec.yaml` → 切換到 `flutter-test-master` skill
+4. **分析影響範圍** — 搜尋相關程式碼（Glob/Grep）：
    - 識別 ViewModel / Repository / Service / API / SDK 依賴
-4. **風險評估** — 金流/敏感資料/認證（高）、並發/記憶體/網路（技術）、關鍵流程/UX（業務）
+   - Web 額外識別：React/Vue/Angular component / route / Redux store
+5. **風險評估** — 金流/敏感資料/認證（高）、並發/記憶體/網路（技術）、關鍵流程/UX（業務）
 
 ### Phase 2: 測試策略設計
 生成 `test-strategy.md`。模板見 [`templates.md`](./templates.md)「test-strategy.md 模板」。
@@ -39,6 +43,18 @@ argument-hint: "[JIRA票號 或 功能描述]"
 - UI 功能 → 載入/錯誤/空白狀態、螢幕尺寸、**a11y（見下）**
 - 資料同步 → 並發寫入、race condition、Thread Sanitizer
 - IM/即時通訊 → 斷線重連、離線同步、多裝置
+- **Web 應用** → 跨瀏覽器（Chrome/Safari/Firefox/Edge）、SSR/CSR、SEO、Cookie/Session、CORS、Visual Regression
+
+**Web 平台特有測試類型**（若 `platforms.web.enabled = true`）：
+
+| 類型 | 對應框架 | 範例 |
+|------|---------|------|
+| E2E UI Test | `{{WEB_PRIMARY_FRAMEWORK}}` (預設 Playwright) | 登入流程、購物車、表單驗證 |
+| Component Test | Playwright Component / Cypress Component | React/Vue 元件獨立測試 |
+| Visual Regression | Playwright snapshot / Percy / Chromatic | 截圖比對找視覺改變 |
+| Cross-browser | Playwright 多 project | Chrome / Safari / Firefox / Edge |
+| Responsive | viewport 切換 | desktop 1920×1080 / tablet 768×1024 / mobile 375×667 |
+| API 黑盒（in E2E）| Playwright `request` / Cypress `cy.request` | UI test 中順便驗 API 行為 |
 
 **a11y（輔助功能）必檢項目** — 每個 UI 功能都要加：
 - **字級縮放**：iOS Dynamic Type 最大 / Android 字型最大 / Android 顯示大小最大
@@ -77,9 +93,11 @@ argument-hint: "[JIRA票號 或 功能描述]"
 | N | JIRA Ticket |
 
 ### Phase 4: 測試覆蓋缺口分析
-搜尋雙平台現有測試：
+搜尋既有測試：
 - iOS：`*Tests.swift` 或 `*Test.swift`
 - Android：`*Test.kt` 或 `*Tests.kt`
+- Web：`*.spec.{ts,js}` / `*.test.{ts,js}` / `e2e/**/*.spec.*` / `cypress/e2e/**`
+- Component test：`*.stories.{ts,js}` 旁的 `*.test.tsx`
 
 比對新增用例 vs 現有測試，識別缺口。模板見 [`templates.md`](./templates.md)「coverage-gaps.md 模板」。
 
@@ -141,7 +159,10 @@ argument-hint: "[JIRA票號 或 功能描述]"
 |---------|------|-----------|
 | `google.tc_template_id` | 複製模板建立 Sheet | 改用 `createSpreadsheet` 從零建 |
 | `google.qa_tc_folder_id` | 上傳目標資料夾 | 提示使用者手動移檔 |
-| `platforms.ios.repo` / `platforms.android.repo` | 程式碼影響面分析 | 跳過自動分析，請使用者貼路徑 |
+| `platforms.ios.repo` / `platforms.android.repo` / `platforms.web.repo` | 程式碼影響面分析 | 跳過自動分析，請使用者貼路徑 |
+| `platforms.web.enabled` | 啟用 Web 平台測試規劃 | 跳過 Web 測試類型 |
+| `platforms.web.frameworks.primary` | Web E2E 預設框架 | 預設 Playwright |
+| `platforms.web.default_browsers` | 跨瀏覽器測試範圍 | 預設 Chrome + Safari |
 | `workflow.auto_a11y_pairing` | a11y 自動配對 | 不自動建議配對 |
 | `mode = markdown-only` | 全程模式 | 不呼叫任何 MCP，輸出 `.md` |
 

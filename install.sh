@@ -116,7 +116,10 @@ render_skill() {
       ["{{PYTEST_PROJECT_ROOT}}",         (.backend.pytest_project_root // "")],
       ["{{SPECKIT_REPO_ROOT}}",           (.speckit.repo_root // "")],
       ["{{PUBLISH_HTML_GENERATOR}}",      (.publish_regression.html_generator_script // "")],
-      ["{{PUBLISH_INDEX_GENERATOR}}",     (.publish_regression.index_generator_script // "")]
+      ["{{PUBLISH_INDEX_GENERATOR}}",     (.publish_regression.index_generator_script // "")],
+      ["{{WEB_REPO}}",                    (.platforms.web.repo // "")],
+      ["{{WEB_PRIMARY_FRAMEWORK}}",       (.platforms.web.frameworks.primary // "playwright")],
+      ["{{WEB_DEFAULT_BROWSERS}}",        (.platforms.web.default_browsers // [] | join(", "))]
     ]
     | map(@tsv) | join("\n")
   ' "$CONFIG_FILE")

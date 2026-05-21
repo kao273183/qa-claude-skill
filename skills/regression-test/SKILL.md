@@ -22,7 +22,7 @@ argument-hint: "[Release 版本號，例如 1.9.0]"
    ```
    分類：新功能 / Bug Fix / 改善 / 技術債
 3. **識別影響模組** — 從 ticket 的 component 或標題歸類到功能模組
-4. **區分平台** — 根據 ticket labels/team 標記 iOS / Android / Both
+4. **區分平台** — 根據 ticket labels/team 標記 iOS / Android / Web / Both / All（依 `platforms.{ios,android,web,flutter}` 啟用情況決定）
 
 ### Phase 2: 歷史 Bug 分析
 
@@ -79,6 +79,8 @@ argument-hint: "[Release 版本號，例如 1.9.0]"
    - **測試總覽 tab**：填入 Release 資訊和測試統計
 
 每項測試用例含 15 欄（A-O）：編號、測試區域、測試類型、測試項目、平台、優先度、風險等級、前置條件、步驟、預期結果、iOS 結果、Android 結果、預估時間、相關 JIRA、備註。
+
+> **Web 平台**（若 `platforms.web.enabled = true`）：可在 K/L 欄位之外新增 `Web (Chrome)` / `Web (Safari)` 結果欄；或將 K=主瀏覽器結果、L=次瀏覽器結果，命名規範依團隊。E 欄「平台」可填 `Web` 或具體 `Web (Chrome)` / `Web (Safari)`。
 
 欄位結構、格式、顏色方案詳見 [`templates.md`](./templates.md)。
 

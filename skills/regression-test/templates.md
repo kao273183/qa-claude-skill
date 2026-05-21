@@ -25,11 +25,13 @@
 | Column | Values |
 |--------|--------|
 | C 測試類型 | Smoke Test, 新功能驗證, Bug Fix 驗證, 高風險回歸, 歷史問題回歸 |
-| E 平台 | iOS, Android, Both |
+| E 平台 | iOS, Android, Both, Web, Web (Chrome), Web (Safari), All |
 | F 優先度 | P0, P1, P2 |
 | G 風險等級 | High, Medium, Low |
-| K iOS 結果 | Pass, Fail, Blocked, N/A |
-| L Android 結果 | Pass, Fail, Blocked, N/A |
+| K iOS 結果 / Web 主瀏覽器 | Pass, Fail, Blocked, N/A |
+| L Android 結果 / Web 次瀏覽器 | Pass, Fail, Blocked, N/A |
+
+> 若 `platforms.web.enabled = true`，建議新增 `Web (Chrome)` 與 `Web (Safari)` 為獨立 dropdown 選項，或在 K/L 之外加 P 欄 `Web (FF)` / Q 欄 `Web (Edge)`。團隊可依 `platforms.web.default_browsers` 決定要追蹤哪些瀏覽器。
 
 ## 條件格式顏色
 

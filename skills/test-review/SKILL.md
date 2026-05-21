@@ -16,7 +16,8 @@ argument-hint: "[測試檔案路徑 或 Google Sheet URL 或 Markdown 路徑]"
 | 輸入 | 審查類型 |
 |------|---------|
 | Google Sheet URL | 讀取 Sheet 名稱，自動判定黑箱/白箱/雙重審查 |
-| 測試程式碼路徑（`.swift` / `.kt` / `.dart` / `.py`） | 測試程式碼審查 |
+| 測試程式碼路徑（`.swift` / `.kt` / `.dart` / `.py` / `.ts` / `.tsx` / `.js`） | 測試程式碼審查 |
+| Web 測試檔（`*.spec.ts` / `*.cy.js` / `*.test.ts`）| 自動識別 Playwright / Cypress / Vitest |
 | Markdown 路徑（含測試表格） | Markdown TC 審查 |
 | 無參數 | 互動式詢問審查類型 |
 
