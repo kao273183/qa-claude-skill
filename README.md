@@ -224,8 +224,8 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 
 - [x] ~~Built-in schema validation~~ — done in v1.1.0 via `scripts/validate-config.sh`
 - [x] ~~More presets: startup / enterprise / government~~ — done in v1.1.0
+- [x] ~~CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)~~ — done in v1.2.0, see [docs/ci-integration.md](docs/ci-integration.md)
 - [ ] Windows native support (currently requires WSL)
-- [ ] CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)
 - [ ] More language support: 日本語 / 简体中文
 - [ ] Web UI for config editing
 - [ ] Skill telemetry (anonymous usage stats to improve defaults)

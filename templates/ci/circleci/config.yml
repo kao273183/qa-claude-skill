@@ -1,0 +1,193 @@
+# QA Claude Skill — CircleCI Template
+#
+# 對應 GitHub Actions / GitLab CI 範本的 CircleCI 版本。
+# 整合 3 個典型 workflow：
+#   1. validate-config (PR 觸發)
+#   2. weekly-mutation-testing (排程)
+#   3. release-regression-publish (tag 觸發 / 手動)
+#
+# 安裝步驟：
+#   1. 複製到 repo 根目錄 .circleci/config.yml
+#   2. 在 CircleCI Project Settings → Environment Variables 設定：
+#      - SLACK_WEBHOOK_URL
+#      - AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
+#      - GOOGLE_SERVICE_ACCOUNT_JSON (base64-encoded)
+#      - DEFAULT_REGRESSION_SHEET_ID
+#   3. 在 CircleCI 開啟 GitHub 整合 + 設定 weekly schedule trigger
+
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@4.1.3
+  python: circleci/python@2.1.1
+
+executors:
+  base:
+    docker:
+      - image: cimg/base:current
+  python311:
+    docker:
+      - image: cimg/python:3.11
+
+jobs:
+  # ──────────────────────────────────────────────────
+  # Job 1: Validate Config
+  # ──────────────────────────────────────────────────
+  validate-config:
+    executor: base
+    steps:
+      - checkout
+      - run:
+          name: Install jq
+          command: sudo apt-get update && sudo apt-get install -y jq
+      - run:
+          name: Validate example + presets
+          command: |
+            chmod +x scripts/validate-config.sh
+            ./scripts/validate-config.sh config/config.example.json
+            for preset in config/presets/*.json; do
+              echo "Validating: $preset"
+              ./scripts/validate-config.sh "$preset" || exit 1
+            done
+      - run:
+          name: Dry-run install
+          command: |
+            cp config/config.example.json config/config.json
+            chmod +x install.sh
+            CLAUDE_SKILLS_DIR=/tmp/qa-ci-test ./install.sh
+            UNRESOLVED=$(grep -rn '{{' /tmp/qa-ci-test/ | grep -v '變數' | wc -l)
+            if [ "$UNRESOLVED" -gt 0 ]; then
+              echo "ERROR: $UNRESOLVED unresolved variables"
+              exit 1
+            fi
+            echo "OK ($(ls /tmp/qa-ci-test | wc -l) skills installed)"
+
+  # ──────────────────────────────────────────────────
+  # Job 2: Weekly Mutation Testing
+  # ──────────────────────────────────────────────────
+  weekly-mutation:
+    executor: python311
+    parameters:
+      paths_to_mutate:
+        type: string
+        default: "src/auth/"
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+          pip-dependency-file: requirements-dev.txt
+      - run:
+          name: Install mutmut
+          command: pip install mutmut
+      - run:
+          name: Baseline pytest
+          command: pytest -x -q
+      - run:
+          name: Run mutmut
+          no_output_timeout: 90m
+          command: |
+            mutmut run --paths-to-mutate="<< parameters.paths_to_mutate >>" || true
+            mutmut results > mutation-results.txt
+            cat mutation-results.txt
+            KILLED=$(grep -oE 'killed: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+            SURVIVED=$(grep -oE 'survived: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+            TOTAL=$((KILLED + SURVIVED))
+            if [ "$TOTAL" -gt 0 ]; then
+              SCORE=$((KILLED * 100 / TOTAL))
+            else
+              SCORE=0
+            fi
+            echo "Mutation Score: ${SCORE}%"
+            mutmut html
+            if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+              curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+                --data "{\"text\":\"🧪 CircleCI Mutation Score: ${SCORE}% (Killed ${KILLED} / Survived ${SURVIVED})\"}"
+            fi
+      - store_artifacts:
+          path: html
+          destination: mutation-report
+
+  # ──────────────────────────────────────────────────
+  # Job 3: Release Regression Publish
+  # ──────────────────────────────────────────────────
+  release-publish:
+    executor: python311
+    parameters:
+      version:
+        type: string
+        default: ""
+      env:
+        type: string
+        default: "uat"
+      sheet_id:
+        type: string
+        default: ""
+    steps:
+      - checkout
+      - aws-cli/setup
+      - python/install-packages:
+          pkg-manager: pip
+          packages: [google-api-python-client, google-auth, jinja2, requests]
+      - run:
+          name: Setup Google credentials
+          command: |
+            echo "$GOOGLE_SERVICE_ACCOUNT_JSON" | base64 -d > /tmp/google-creds.json
+            echo 'export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-creds.json' >> "$BASH_ENV"
+      - run:
+          name: Resolve inputs
+          command: |
+            VERSION="<< parameters.version >>"
+            VERSION="${VERSION:-${CIRCLE_TAG#v}}"
+            VERSION="${VERSION:-1.0.0}"
+            ENV="<< parameters.env >>"
+            SHEET_ID="<< parameters.sheet_id >>"
+            SHEET_ID="${SHEET_ID:-$DEFAULT_REGRESSION_SHEET_ID}"
+            TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+            echo "export VERSION=$VERSION" >> "$BASH_ENV"
+            echo "export ENV=$ENV" >> "$BASH_ENV"
+            echo "export SHEET_ID=$SHEET_ID" >> "$BASH_ENV"
+            echo "export TIMESTAMP=$TIMESTAMP" >> "$BASH_ENV"
+      - run:
+          name: Read Sheet + Generate HTML + Upload to S3
+          command: |
+            python scripts/read_sheet_to_json.py --sheet-id "$SHEET_ID" --version "$VERSION" --env "$ENV" --output /tmp/manual_input_${VERSION}.json
+            python scripts/generate_manual_html.py /tmp/manual_input_${VERSION}.json /tmp/manual_out/
+            S3_PATH="s3://${S3_BUCKET:-your-qa-reports-bucket}/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}"
+            aws s3 cp /tmp/manual_out/ "${S3_PATH}/" --recursive --region "${AWS_REGION:-ap-northeast-1}"
+            S3_BUCKET="${S3_BUCKET:-your-qa-reports-bucket}" S3_PREFIX=pytest-reports/ INDEX_OUTPUT=/tmp/index.html python scripts/generate_index_html.py
+            aws s3 cp /tmp/index.html "s3://${S3_BUCKET:-your-qa-reports-bucket}/index.html" --content-type "text/html" --region "${AWS_REGION:-ap-northeast-1}"
+            aws cloudfront create-invalidation --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" --paths "/*" --no-cli-pager
+            REPORT_URL="http://${S3_BUCKET:-your-qa-reports-bucket}.s3-website-${AWS_REGION:-ap-northeast-1}.amazonaws.com/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}/report.html"
+            echo "Published: $REPORT_URL"
+            if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+              curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+                --data "{\"text\":\"📊 *Regression v${VERSION} 已發布* — ${REPORT_URL}\"}"
+            fi
+
+workflows:
+  pull-request:
+    jobs:
+      - validate-config:
+          filters:
+            branches:
+              ignore: main
+
+  weekly-mutation:
+    triggers:
+      - schedule:
+          # 每週日 UTC 16:00（台北週一 00:00）
+          cron: "0 16 * * 0"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - weekly-mutation
+
+  release:
+    jobs:
+      - release-publish:
+          filters:
+            tags:
+              only: /^v[0-9]+\.[0-9]+\.[0-9]+.*/
+            branches:
+              ignore: /.*/

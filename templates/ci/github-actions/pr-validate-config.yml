@@ -1,0 +1,72 @@
+# PR Validation — QA Claude Skill Config
+#
+# 範本：當 config/*.json 改動時，跑 validate-config.sh 確認 schema/必填/一致性正確
+#
+# 安裝步驟：
+#   1. 複製這份檔案到你的 repo 的 .github/workflows/pr-validate-config.yml
+#   2. 確保 repo 內有 scripts/validate-config.sh + config/config.schema.json
+#   3. PR 觸發時會自動跑
+
+name: PR Validate QA Config
+
+on:
+  pull_request:
+    paths:
+      - 'config/**/*.json'
+      - 'scripts/validate-config.sh'
+      - '.github/workflows/pr-validate-config.yml'
+  workflow_dispatch:  # 也允許手動觸發
+
+jobs:
+  validate:
+    name: Validate QA config
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Make validator executable
+        run: chmod +x scripts/validate-config.sh
+
+      - name: Validate config.example.json
+        run: ./scripts/validate-config.sh config/config.example.json
+
+      - name: Validate all presets
+        run: |
+          set -e
+          for preset in config/presets/*.json; do
+            echo "──────────────────────────────────────"
+            echo "Validating: $preset"
+            echo "──────────────────────────────────────"
+            ./scripts/validate-config.sh "$preset" || {
+              echo "::error file=$preset::Config validation failed"
+              exit 1
+            }
+          done
+
+      - name: Validate any custom configs (optional)
+        if: hashFiles('config/config.json') != ''
+        run: ./scripts/validate-config.sh config/config.json
+
+      - name: Dry-run install
+        env:
+          CLAUDE_SKILLS_DIR: /tmp/qa-ci-test
+        run: |
+          # 用 example config 做 dry-run，確認所有 {{變數}} 都能渲染
+          cp config/config.example.json config/config.json
+          chmod +x install.sh
+          ./install.sh
+
+          # 確認沒有未解析的變數（排除說明文字）
+          UNRESOLVED=$(grep -rn '{{' /tmp/qa-ci-test/ | grep -v '變數' | wc -l)
+          if [ "$UNRESOLVED" -gt 0 ]; then
+            echo "::error::Found $UNRESOLVED unresolved variables after rendering"
+            grep -rn '{{' /tmp/qa-ci-test/ | grep -v '變數' | head -10
+            exit 1
+          fi
+
+          echo "✅ All variables rendered correctly"
+          echo "📁 Skills installed: $(ls /tmp/qa-ci-test | wc -l)"

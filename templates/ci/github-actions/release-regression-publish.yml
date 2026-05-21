@@ -1,0 +1,172 @@
+# Release Regression + Publish
+#
+# 範本：Release tag 推送或手動觸發時：
+#   1. 從 Google Sheet 撈手動回歸測試結果
+#   2. 生成 HTML 報告
+#   3. 上傳 S3 + 重建 dashboard index + CloudFront invalidation
+#   4. 發送 Slack 通知
+#
+# 適合：啟用 publish_regression.report_pipeline.type = "s3_cloudfront" 的團隊
+#
+# 安裝步驟：
+#   1. 複製到 .github/workflows/release-regression-publish.yml
+#   2. 在 repo Settings → Secrets 加入：
+#      - AWS_ACCESS_KEY_ID
+#      - AWS_SECRET_ACCESS_KEY
+#      - SLACK_WEBHOOK_URL (optional)
+#      - GOOGLE_SERVICE_ACCOUNT_JSON (for Sheets API)
+#   3. 確保 publish-regression skill 已安裝
+#
+# 觸發方式：
+#   - 推送 release tag (v1.2.3)
+#   - 手動觸發（指定 sheet_id / version / env）
+
+name: Release Regression Publish
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'    # v1.2.3
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'  # v1.2.3-rc1
+
+  workflow_dispatch:
+    inputs:
+      sheet_id:
+        description: 'Google Sheet ID (regression test results)'
+        required: true
+      version:
+        description: 'App version (e.g. 1.8.0)'
+        required: true
+      env:
+        description: 'Environment'
+        required: true
+        default: 'uat'
+        type: choice
+        options: [uat, staging, production]
+
+env:
+  AWS_REGION: ap-northeast-1
+  S3_BUCKET: your-qa-reports-bucket
+  CLOUDFRONT_DISTRIBUTION_ID: EXXXXXXXX
+
+jobs:
+  publish:
+    name: Publish regression report
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python deps
+        run: |
+          pip install google-api-python-client google-auth jinja2 requests
+
+      - name: Resolve inputs
+        id: inputs
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+            ENV="production"
+            SHEET_ID="${{ secrets.DEFAULT_REGRESSION_SHEET_ID }}"
+          else
+            VERSION="${{ github.event.inputs.version }}"
+            ENV="${{ github.event.inputs.env }}"
+            SHEET_ID="${{ github.event.inputs.sheet_id }}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "env=$ENV" >> $GITHUB_OUTPUT
+          echo "sheet_id=$SHEET_ID" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Google Sheets credentials
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}' > /tmp/google-creds.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-creds.json" >> $GITHUB_ENV
+
+      - name: Read Sheet → Build input JSON
+        env:
+          SHEET_ID: ${{ steps.inputs.outputs.sheet_id }}
+          VERSION: ${{ steps.inputs.outputs.version }}
+          ENV: ${{ steps.inputs.outputs.env }}
+        run: |
+          # 你的 Python 腳本：讀 Sheet 15 欄 → 寫 /tmp/manual_input_${VERSION}.json
+          # 對齊 publish-regression skill 的格式
+          python scripts/read_sheet_to_json.py \
+            --sheet-id "$SHEET_ID" \
+            --version "$VERSION" \
+            --env "$ENV" \
+            --output /tmp/manual_input_${VERSION}.json
+
+      - name: Generate HTML report
+        run: |
+          python scripts/generate_manual_html.py \
+            /tmp/manual_input_${{ steps.inputs.outputs.version }}.json \
+            /tmp/manual_out/
+
+      - name: Upload to S3
+        env:
+          VERSION: ${{ steps.inputs.outputs.version }}
+          ENV: ${{ steps.inputs.outputs.env }}
+          TIMESTAMP: ${{ steps.inputs.outputs.timestamp }}
+        run: |
+          S3_PATH="s3://${{ env.S3_BUCKET }}/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}"
+          aws s3 cp /tmp/manual_out/ "${S3_PATH}/" --recursive
+          echo "S3_PATH=${S3_PATH}" >> $GITHUB_ENV
+
+      - name: Rebuild dashboard index
+        run: |
+          S3_BUCKET=${{ env.S3_BUCKET }} \
+          S3_PREFIX=pytest-reports/ \
+          INDEX_OUTPUT=/tmp/index.html \
+          python scripts/generate_index_html.py
+          aws s3 cp /tmp/index.html "s3://${{ env.S3_BUCKET }}/index.html" \
+            --content-type "text/html"
+
+      - name: Invalidate CloudFront
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*" \
+            --no-cli-pager
+
+      - name: Compose report summary
+        id: summary
+        env:
+          VERSION: ${{ steps.inputs.outputs.version }}
+          ENV: ${{ steps.inputs.outputs.env }}
+          TIMESTAMP: ${{ steps.inputs.outputs.timestamp }}
+        run: |
+          REPORT_URL="http://${{ env.S3_BUCKET }}.s3-website-${{ env.AWS_REGION }}.amazonaws.com/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}/report.html"
+          DASHBOARD_URL="https://your-distribution.cloudfront.net/index.html"
+          echo "report_url=$REPORT_URL" >> $GITHUB_OUTPUT
+          echo "dashboard_url=$DASHBOARD_URL" >> $GITHUB_OUTPUT
+
+          echo "## 🎯 Regression Published" >> $GITHUB_STEP_SUMMARY
+          echo "- Version: $VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "- Env: $ENV" >> $GITHUB_STEP_SUMMARY
+          echo "- Report: $REPORT_URL" >> $GITHUB_STEP_SUMMARY
+          echo "- Dashboard: $DASHBOARD_URL" >> $GITHUB_STEP_SUMMARY
+
+      - name: Notify Slack
+        if: env.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+            --data "{
+              \"text\": \"📊 *Regression v${{ steps.inputs.outputs.version }} 已發布*\n📈 Env: ${{ steps.inputs.outputs.env }}\n🔗 Report: ${{ steps.summary.outputs.report_url }}\n🔗 Dashboard: ${{ steps.summary.outputs.dashboard_url }}\"
+            }"

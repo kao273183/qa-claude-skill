@@ -1,0 +1,125 @@
+# Weekly Mutation Testing
+#
+# 範本：每週跑一次 mutation testing（mutmut），檢視 TC 真實強度
+# 適合：已啟用 backend.pytest_enabled + backend.mutation.enabled 的團隊
+#
+# 安裝步驟：
+#   1. 複製到 .github/workflows/weekly-mutation-testing.yml
+#   2. 在 repo Settings → Secrets 加入：
+#      - SLACK_WEBHOOK_URL (optional, for notifications)
+#   3. 調整 paths_to_mutate 為你的 critical 模組
+#
+# 注意：mutation testing 比一般測試慢 100x+，週跑比 per-PR 跑合理。
+
+name: Weekly Mutation Testing
+
+on:
+  schedule:
+    - cron: '0 16 * * 0'   # 每週日 UTC 16:00 = 台北 00:00（週一）
+  workflow_dispatch:        # 也支援手動觸發
+    inputs:
+      target_module:
+        description: '目標模組（如 health / payment / auth）'
+        required: true
+        default: 'auth'
+      paths_to_mutate:
+        description: '要變異的 source path（如 src/auth/）'
+        required: true
+        default: 'src/auth/'
+
+env:
+  PYTHON_VERSION: '3.11'
+  MUTATION_SCORE_TARGET: 80
+  CRITICAL_SCORE_TARGET: 95
+
+jobs:
+  mutmut:
+    name: Mutation testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 120  # mutation testing 可能跑 1-2 小時
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.txt
+          pip install mutmut
+
+      - name: Run pytest baseline (must pass)
+        run: |
+          pytest -x -q
+          if [ $? -ne 0 ]; then
+            echo "::error::Baseline pytest failed; mutation requires green baseline"
+            exit 1
+          fi
+
+      - name: Run mutmut
+        id: mutmut
+        run: |
+          mutmut run --paths-to-mutate="${{ github.event.inputs.paths_to_mutate || 'src/auth/' }}" || true
+          mutmut results > mutation-results.txt
+          cat mutation-results.txt
+
+          # 解析 mutation score
+          KILLED=$(grep -oE 'killed: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+          SURVIVED=$(grep -oE 'survived: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+          TOTAL=$((KILLED + SURVIVED))
+          if [ "$TOTAL" -gt 0 ]; then
+            SCORE=$((KILLED * 100 / TOTAL))
+          else
+            SCORE=0
+          fi
+
+          echo "killed=$KILLED" >> $GITHUB_OUTPUT
+          echo "survived=$SURVIVED" >> $GITHUB_OUTPUT
+          echo "score=$SCORE" >> $GITHUB_OUTPUT
+
+          echo "## Mutation Score: $SCORE%" >> $GITHUB_STEP_SUMMARY
+          echo "- Killed: $KILLED" >> $GITHUB_STEP_SUMMARY
+          echo "- Survived: $SURVIVED" >> $GITHUB_STEP_SUMMARY
+
+      - name: Generate HTML report
+        if: always()
+        run: |
+          mutmut html
+          mkdir -p mutation-report
+          mv html mutation-report/
+
+      - name: Upload mutation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mutation-report-${{ github.run_id }}
+          path: mutation-report/
+          retention-days: 30
+
+      - name: Fail if below target
+        run: |
+          SCORE=${{ steps.mutmut.outputs.score }}
+          TARGET=${{ env.MUTATION_SCORE_TARGET }}
+          if [ "$SCORE" -lt "$TARGET" ]; then
+            echo "::warning::Mutation Score $SCORE% < target $TARGET%"
+            # 注意：用 warning 而非 error，因為 weekly 跑只是觀測
+            # 若要硬卡，改為 exit 1
+          fi
+
+      - name: Notify Slack
+        if: env.SLACK_WEBHOOK_URL != ''
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SCORE: ${{ steps.mutmut.outputs.score }}
+          KILLED: ${{ steps.mutmut.outputs.killed }}
+          SURVIVED: ${{ steps.mutmut.outputs.survived }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+            --data "{
+              \"text\": \"🧪 Weekly Mutation Testing\n*Score:* ${SCORE}%\n*Killed:* ${KILLED}\n*Survived:* ${SURVIVED}\n*Report:* <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>\"
+            }"

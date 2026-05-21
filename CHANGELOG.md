@@ -1,5 +1,35 @@
 # Changelog
 
+## v1.2.0 — 2026-05-21
+
+### Added
+
+- 🚀 **CI/CD 整合範本** — 支援 3 大主流平台 × 3 種典型工作流（共 9 個範本檔）
+  - **GitHub Actions** (`templates/ci/github-actions/`):
+    * `pr-validate-config.yml` — PR 時自動校驗 config + dry-run install
+    * `weekly-mutation-testing.yml` — 週跑 mutation testing + Slack 通知
+    * `release-regression-publish.yml` — tag push 時自動上傳 S3 + 重建 dashboard
+  - **GitLab CI** (`templates/ci/gitlab-ci/.gitlab-ci.yml`):
+    * 整合 3 個 job 對應上述 workflow
+    * 用 `rules:` 條件分流
+  - **CircleCI** (`templates/ci/circleci/config.yml`):
+    * 對應 3 個 job + workflow 觸發條件
+    * 用 orbs（aws-cli + python）簡化
+
+- 📖 **完整 CI 整合指南** ([`docs/ci-integration.md`](docs/ci-integration.md))
+  - 3 種典型工作流解釋（PR 校驗 / 週跑 mutation / Release 發布）
+  - 各平台安裝步驟（GitHub Actions / GitLab CI / CircleCI）
+  - Secrets 管理（6 種 secret × 取得方式 × 設定步驟）
+  - 排程設定（GitHub yml-based / GitLab UI-based / CircleCI workflow）
+  - 客製化建議（mutation score 目標、failure 行為、matrix 多模組）
+  - Troubleshooting（5 個常見問題 + 解法）
+
+### Changed
+
+- README Roadmap 標記 #2 為完成
+
+---
+
 ## v1.1.0 — 2026-05-21
 
 ### Added

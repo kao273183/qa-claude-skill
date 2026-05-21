@@ -1,0 +1,149 @@
+# QA Claude Skill — GitLab CI Template
+#
+# 對應 GitHub Actions 範本的 GitLab CI 版本。
+# 整合 3 個典型 workflow：
+#   1. validate-config (PR / MR 觸發)
+#   2. weekly-mutation-testing (排程)
+#   3. release-regression-publish (tag 觸發 / 手動)
+#
+# 安裝步驟：
+#   1. 複製到 repo 根目錄 .gitlab-ci.yml
+#   2. 在 Settings → CI/CD → Variables 設定（標記為 Masked）：
+#      - SLACK_WEBHOOK_URL
+#      - AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
+#      - GOOGLE_SERVICE_ACCOUNT_JSON (File type)
+#      - DEFAULT_REGRESSION_SHEET_ID
+#   3. 確保 repo 內有 scripts/validate-config.sh 和 publish-regression skill
+
+stages:
+  - validate
+  - mutation-test
+  - publish
+
+variables:
+  PYTHON_VERSION: '3.11'
+  AWS_REGION: 'ap-northeast-1'
+  S3_BUCKET: 'your-qa-reports-bucket'
+  CLOUDFRONT_DISTRIBUTION_ID: 'EXXXXXXXX'
+  MUTATION_SCORE_TARGET: '80'
+
+# ────────────────────────────────────────────────────
+# Job 1: Validate Config (PR / MR 觸發)
+# ────────────────────────────────────────────────────
+validate-config:
+  stage: validate
+  image: alpine:latest
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+      changes:
+        - 'config/**/*.json'
+        - 'scripts/validate-config.sh'
+    - if: $CI_PIPELINE_SOURCE == 'web'  # 也支援手動觸發
+  before_script:
+    - apk add --no-cache bash jq
+  script:
+    - chmod +x scripts/validate-config.sh
+    - echo "── Validating config.example.json ──"
+    - ./scripts/validate-config.sh config/config.example.json
+    - echo "── Validating all presets ──"
+    - |
+      for preset in config/presets/*.json; do
+        echo "Validating: $preset"
+        ./scripts/validate-config.sh "$preset" || exit 1
+      done
+    - echo "── Dry-run install ──"
+    - cp config/config.example.json config/config.json
+    - chmod +x install.sh
+    - CLAUDE_SKILLS_DIR=/tmp/qa-ci-test ./install.sh
+    - |
+      UNRESOLVED=$(grep -rn '{{' /tmp/qa-ci-test/ | grep -v '變數' | wc -l)
+      if [ "$UNRESOLVED" -gt 0 ]; then
+        echo "ERROR: Found $UNRESOLVED unresolved variables"
+        exit 1
+      fi
+      echo "OK All variables rendered ($(ls /tmp/qa-ci-test | wc -l) skills installed)"
+
+# ────────────────────────────────────────────────────
+# Job 2: Weekly Mutation Testing (排程觸發)
+# ────────────────────────────────────────────────────
+weekly-mutation:
+  stage: mutation-test
+  image: python:${PYTHON_VERSION}
+  timeout: 2h
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'schedule' && $JOB_TYPE == 'mutation'
+    - if: $CI_PIPELINE_SOURCE == 'web' && $JOB_TYPE == 'mutation'
+  variables:
+    PATHS_TO_MUTATE: 'src/auth/'  # 在 Schedule 變數中覆寫
+  before_script:
+    - pip install -r requirements-dev.txt
+    - pip install mutmut
+  script:
+    - echo "── Baseline pytest ──"
+    - pytest -x -q
+    - echo "── Running mutmut on ${PATHS_TO_MUTATE} ──"
+    - mutmut run --paths-to-mutate="${PATHS_TO_MUTATE}" || true
+    - mutmut results > mutation-results.txt
+    - cat mutation-results.txt
+    - |
+      KILLED=$(grep -oE 'killed: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+      SURVIVED=$(grep -oE 'survived: [0-9]+' mutation-results.txt | grep -oE '[0-9]+' || echo 0)
+      TOTAL=$((KILLED + SURVIVED))
+      if [ "$TOTAL" -gt 0 ]; then
+        SCORE=$((KILLED * 100 / TOTAL))
+      else
+        SCORE=0
+      fi
+      echo "Mutation Score: ${SCORE}% (Killed: $KILLED / Survived: $SURVIVED)"
+      mutmut html
+    - |
+      if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+        curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+          --data "{\"text\":\"🧪 GitLab Weekly Mutation Testing\nScore: ${SCORE}%\nKilled: ${KILLED} / Survived: ${SURVIVED}\nReport: ${CI_PIPELINE_URL}\"}"
+      fi
+  artifacts:
+    when: always
+    paths:
+      - html/
+      - mutation-results.txt
+    expire_in: 30 days
+
+# ────────────────────────────────────────────────────
+# Job 3: Release Regression Publish (tag 觸發 / 手動)
+# ────────────────────────────────────────────────────
+release-publish:
+  stage: publish
+  image: python:${PYTHON_VERSION}
+  timeout: 30m
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+/
+    - if: $CI_PIPELINE_SOURCE == 'web' && $JOB_TYPE == 'publish-regression'
+  variables:
+    VERSION: ${CI_COMMIT_TAG}
+    ENV: 'production'
+  before_script:
+    - apt-get update && apt-get install -y awscli jq
+    - pip install google-api-python-client google-auth jinja2 requests
+    - echo "$GOOGLE_SERVICE_ACCOUNT_JSON" > /tmp/google-creds.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=/tmp/google-creds.json
+  script:
+    - VERSION="${CI_COMMIT_TAG:-${VERSION_OVERRIDE:-1.0.0}}"
+    - VERSION="${VERSION#v}"
+    - ENV="${ENV_OVERRIDE:-${ENV:-uat}}"
+    - SHEET_ID="${SHEET_ID_OVERRIDE:-$DEFAULT_REGRESSION_SHEET_ID}"
+    - TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+    - echo "Publishing: v$VERSION ($ENV) from sheet $SHEET_ID"
+    - python scripts/read_sheet_to_json.py --sheet-id "$SHEET_ID" --version "$VERSION" --env "$ENV" --output /tmp/manual_input_${VERSION}.json
+    - python scripts/generate_manual_html.py /tmp/manual_input_${VERSION}.json /tmp/manual_out/
+    - S3_PATH="s3://${S3_BUCKET}/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}"
+    - aws s3 cp /tmp/manual_out/ "${S3_PATH}/" --recursive --region "${AWS_REGION}"
+    - S3_BUCKET="${S3_BUCKET}" S3_PREFIX=pytest-reports/ INDEX_OUTPUT=/tmp/index.html python scripts/generate_index_html.py
+    - aws s3 cp /tmp/index.html "s3://${S3_BUCKET}/index.html" --content-type "text/html" --region "${AWS_REGION}"
+    - aws cloudfront create-invalidation --distribution-id "${CLOUDFRONT_DISTRIBUTION_ID}" --paths "/*" --no-cli-pager
+    - REPORT_URL="http://${S3_BUCKET}.s3-website-${AWS_REGION}.amazonaws.com/pytest-reports/manual-${ENV}-${VERSION}/${TIMESTAMP}/report.html"
+    - echo "REPORT_URL=${REPORT_URL}"
+    - |
+      if [ -n "${SLACK_WEBHOOK_URL:-}" ]; then
+        curl -X POST -H 'Content-type: application/json' "$SLACK_WEBHOOK_URL" \
+          --data "{\"text\":\"📊 *Regression v${VERSION} 已發布*\nEnv: ${ENV}\nReport: ${REPORT_URL}\"}"
+      fi
