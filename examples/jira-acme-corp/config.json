@@ -1,0 +1,99 @@
+{
+  "$schema": "../../config/config.schema.json",
+  "$comment": "範例：虛構公司 ACME Corp — iOS + Android 雙平台、有 JIRA + Slack + Google Workspace",
+
+  "mode": "full-mcp",
+
+  "jira": {
+    "instance_url": "https://acme.atlassian.net",
+    "project_key": "ACME",
+    "bug_issue_type_id": "10046",
+    "reviewer_account_id": "5fb87654321abc",
+    "reviewer_field": "customfield_10045",
+    "boards": [
+      { "name": "iOS-Team", "board_id": "201", "team_id": "ios-team-uuid", "scope": "iOS native features" },
+      { "name": "Android-Team", "board_id": "202", "team_id": "android-team-uuid", "scope": "Android native features" },
+      { "name": "Backend-Team", "board_id": "203", "team_id": "be-team-uuid", "scope": "API / Infrastructure" }
+    ],
+    "priority_mapping": {
+      "Blocker": "Highest",
+      "Critical": "High",
+      "Major": "Medium",
+      "Minor": "Low"
+    }
+  },
+
+  "slack": {
+    "user_id": "U01ABCDEF",
+    "bug_channel_id": "C01BUGS00",
+    "release_channel_id": "C01RELEASE",
+    "notification_rules": {
+      "bug_report": ["dm", "channel"],
+      "tc_review_complete": ["dm"],
+      "regression_published": ["channel"]
+    }
+  },
+
+  "google": {
+    "tc_template_id": "1ACME_TC_TEMPLATE_ID",
+    "qa_tc_folder_id": "1ACME_QA_TC_FOLDER_ID",
+    "release_schedule_id": "1ACME_RELEASE_SCHEDULE",
+    "regression_template_id": "1ACME_REGRESSION_TEMPLATE",
+    "default_drive": "shared"
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone 15 Pro",
+      "default_os_version": "iOS 17.5",
+      "min_os_version": "iOS 16.0",
+      "repo": "acme-corp/acme-ios",
+      "release_branch_pattern": "release/{version}",
+      "version_file": "**/Info.plist"
+    },
+    "android": {
+      "default_device": "Pixel 8",
+      "default_os_version": "Android 14",
+      "min_api_level": 28,
+      "repo": "acme-corp/acme-android",
+      "release_tag_pattern": "v{version}",
+      "version_file": "**/build.gradle"
+    },
+    "flutter": { "enabled": false }
+  },
+
+  "backend": {
+    "pytest_enabled": false
+  },
+
+  "publish_regression": {
+    "enabled": true,
+    "html_generator_script": "/Users/qa-lead/acme-pytest/scripts/generate_manual_html.py",
+    "index_generator_script": "/Users/qa-lead/acme-pytest/scripts/generate_index_html.py",
+    "report_pipeline": {
+      "type": "s3_cloudfront",
+      "s3_bucket": "acme-qa-reports",
+      "s3_region": "us-east-1",
+      "s3_prefix": "regression/",
+      "cloudfront_distribution_id": "E1ACME12345",
+      "dashboard_url": "https://qa-dash.acme.com/index.html",
+      "report_url_template": "https://qa-dash.acme.com/{prefix}manual-{env}-{version}/{timestamp}/report.html"
+    },
+    "default_env": "uat"
+  },
+
+  "review_protocol": {
+    "tri_party_enabled": false
+  },
+
+  "language": {
+    "primary": "en",
+    "secondary": "zh-TW"
+  },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": true,
+    "auto_root_cause_depth": { "ios": "deep", "android": "deep" }
+  }
+}

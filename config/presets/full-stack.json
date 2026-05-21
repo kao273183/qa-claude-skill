@@ -1,0 +1,21 @@
+{
+  "$comment": "Preset: full-stack — 有完整 JIRA + Slack + Google Drive MCP 整合的團隊",
+  "mode": "full-mcp",
+  "jira": {
+    "instance_url": "https://your-company.atlassian.net",
+    "project_key": "PROJ",
+    "bug_issue_type_id": "10046",
+    "reviewer_field": "customfield_10045"
+  },
+  "slack": {
+    "notification_rules": {
+      "bug_report": ["dm", "channel"],
+      "tc_review_complete": ["dm"],
+      "regression_published": ["channel"]
+    }
+  },
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": true
+  }
+}

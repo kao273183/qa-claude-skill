@@ -1,0 +1,210 @@
+{
+  "$schema": "./config.schema.json",
+  "$comment": "複製此檔為 config.json 後填入你的組織資訊。未填寫的欄位在 install.sh 執行時會警告。",
+
+  "mode": "full-mcp",
+
+  "jira": {
+    "instance_url": "https://your-company.atlassian.net",
+    "project_key": "PROJ",
+    "bug_issue_type_id": "10046",
+    "reviewer_account_id": "",
+    "reviewer_field": "customfield_10045",
+    "boards": [
+      {
+        "name": "Team-A",
+        "board_id": "111",
+        "team_id": "",
+        "scope": "首頁相關"
+      },
+      {
+        "name": "Team-B",
+        "board_id": "222",
+        "team_id": "",
+        "scope": "IOM 相關"
+      }
+    ],
+    "priority_mapping": {
+      "Blocker": "Highest",
+      "Critical": "High",
+      "Major": "Medium",
+      "Minor": "Low"
+    }
+  },
+
+  "slack": {
+    "user_id": "",
+    "bug_channel_id": "",
+    "release_channel_id": "",
+    "notification_rules": {
+      "bug_report": ["dm", "channel"],
+      "tc_review_complete": ["dm"],
+      "regression_published": ["channel"]
+    }
+  },
+
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": "",
+    "release_schedule_id": "",
+    "regression_template_id": "",
+    "outsource_bug_sheet_id": "",
+    "default_drive": "shared",
+    "$comment_default_drive": "shared | personal — 預設要把生成的 Sheet 放在共用雲端硬碟或我的雲端硬碟"
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone 15 Pro",
+      "default_os_version": "iOS 17.5",
+      "min_os_version": "iOS 16.0",
+      "repo": "your-org/your-ios-repo",
+      "release_branch_pattern": "release/{version}",
+      "version_file": "**/*.xcconfig"
+    },
+    "android": {
+      "default_device": "Pixel 8",
+      "default_os_version": "Android 14",
+      "min_api_level": 28,
+      "repo": "your-org/your-android-repo",
+      "release_tag_pattern": "v{version}",
+      "version_file": "**/build.gradle"
+    },
+    "flutter": {
+      "enabled": false,
+      "repo": "your-org/your-flutter-repo",
+      "min_dart_sdk": "3.0.0"
+    }
+  },
+
+  "test_case_format": {
+    "columns": {
+      "A": "ID",
+      "B": "Phase",
+      "C": "測試結果",
+      "D": "測試結論",
+      "E": "測試標題",
+      "F": "測試分類",
+      "G": "優先度",
+      "H": "平台",
+      "I": "前置條件",
+      "J": "測試步驟",
+      "K": "預期結果",
+      "L": "自動化",
+      "M": "備註",
+      "N": "JIRA Ticket"
+    },
+    "categories": [
+      "冒煙-Feature Done",
+      "功能測試",
+      "異常/邊界測試",
+      "API 驗證測試",
+      "內部狀態驗證"
+    ],
+    "priorities": ["P0", "P1", "P2"],
+    "platforms": ["iOS", "Android", "Both"],
+    "id_prefix": {
+      "black_box": "BB",
+      "white_box": "WB"
+    }
+  },
+
+  "review_protocol": {
+    "tri_party_enabled": false,
+    "reviewers": ["claude", "codex", "gemini"],
+    "dimensions": 10,
+    "max_score_per_dimension": 5,
+    "severity_thresholds": {
+      "critical_max": 2.0,
+      "major_max": 3.5,
+      "minor_max": 4.5
+    }
+  },
+
+  "backend": {
+    "pytest_enabled": false,
+    "pytest_project_root": "",
+    "client_naming": "<feature>_client + <feature>_auth_client",
+    "schema_dsl": "plain_dict",
+    "$comment_schema_dsl": "plain_dict | s_dsl | pydantic — schema 定義方式",
+    "feature_modules": [],
+    "mutation": {
+      "enabled": false,
+      "score_target": 80,
+      "critical_score_target": 95,
+      "output_root": "~/.local/share/qa-mutation"
+    },
+    "property_based": {
+      "enabled": false,
+      "default_max_examples": 200,
+      "ci_max_examples": 100,
+      "thorough_max_examples": 1000
+    }
+  },
+
+  "speckit": {
+    "enabled": false,
+    "repo_root": "",
+    "feature_routing": [
+      {
+        "keywords": ["stamp", "NFC", "圖章"],
+        "path": "love/stamp/",
+        "epic": ""
+      },
+      {
+        "keywords": ["health", "步數", "HealthKit"],
+        "path": "peace/health/",
+        "epic": ""
+      }
+    ],
+    "fallback": "ask_user",
+    "$comment_fallback": "ask_user | error — 沒 match 時的行為"
+  },
+
+  "publish_regression": {
+    "enabled": false,
+    "html_generator_script": "",
+    "index_generator_script": "",
+    "report_pipeline": {
+      "type": "local_html",
+      "$comment_type": "s3_cloudfront | local_html",
+      "s3_bucket": "",
+      "s3_region": "ap-northeast-1",
+      "s3_prefix": "pytest-reports/",
+      "cloudfront_distribution_id": "",
+      "dashboard_url": "",
+      "report_url_template": "http://{bucket}.s3-website-{region}.amazonaws.com/{prefix}manual-{env}-{version}/{timestamp}/report.html"
+    },
+    "default_env": "uat",
+    "naming_pattern": "manual-{env}-{version}"
+  },
+
+  "smoke": {
+    "time_budgets": { "T0": 3, "T1": 10, "T2": 60 },
+    "$comment_time_budgets": "minutes — per-tier CI execution budget",
+    "scoring_weights": {
+      "criticality": 0.30,
+      "speed": 0.25,
+      "stability": 0.25,
+      "independence": 0.10,
+      "coverage_value": 0.10
+    }
+  },
+
+  "language": {
+    "primary": "zh-TW",
+    "secondary": "en",
+    "$comment": "primary 決定 Skill 主要輸出語言；secondary 是 README/docs 的對照語言"
+  },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": true,
+    "$comment_a11y": "a11y bug 自動開一對 iOS+Android 用 Relates 連結",
+    "auto_root_cause_depth": {
+      "ios": "deep",
+      "android": "suggestion-only",
+      "$comment": "deep = 深入程式碼分析；suggestion-only = 只給分析建議不深入碼"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$comment": "Preset: jira-only — 只有 JIRA、沒有 Slack/Google 整合的團隊",
+  "mode": "partial-mcp",
+  "jira": {
+    "instance_url": "https://your-company.atlassian.net",
+    "project_key": "PROJ"
+  },
+  "slack": {
+    "user_id": "",
+    "bug_channel_id": "",
+    "notification_rules": {
+      "bug_report": [],
+      "tc_review_complete": [],
+      "regression_published": []
+    }
+  },
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": ""
+  },
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": false
+  }
+}

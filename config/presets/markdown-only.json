@@ -1,0 +1,34 @@
+{
+  "$comment": "Preset: markdown-only — 不使用任何 MCP，Skill 純粹輸出 Markdown 報告/檔案。適合單人開發者、無外部工具整合的情境。",
+  "mode": "markdown-only",
+  "jira": {
+    "instance_url": "n/a",
+    "project_key": "LOCAL"
+  },
+  "slack": {
+    "user_id": "",
+    "notification_rules": {
+      "bug_report": [],
+      "tc_review_complete": [],
+      "regression_published": []
+    }
+  },
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": ""
+  },
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone (latest)",
+      "default_os_version": "iOS (latest)"
+    },
+    "android": {
+      "default_device": "Pixel (latest)",
+      "default_os_version": "Android (latest)"
+    }
+  },
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": false
+  }
+}

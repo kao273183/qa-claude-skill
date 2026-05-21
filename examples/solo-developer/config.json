@@ -1,0 +1,58 @@
+{
+  "$schema": "../../config/config.schema.json",
+  "$comment": "範例：單人開發者 / 學習用 — 不依賴任何 MCP，所有輸出寫成本地 .md",
+
+  "mode": "markdown-only",
+
+  "jira": {
+    "instance_url": "n/a",
+    "project_key": "LOCAL"
+  },
+
+  "slack": {
+    "user_id": "",
+    "notification_rules": {
+      "bug_report": [],
+      "tc_review_complete": [],
+      "regression_published": []
+    }
+  },
+
+  "google": {
+    "tc_template_id": "",
+    "qa_tc_folder_id": ""
+  },
+
+  "platforms": {
+    "ios": {
+      "default_device": "iPhone (latest available)",
+      "default_os_version": "iOS (latest)",
+      "min_os_version": "iOS 16.0"
+    },
+    "android": {
+      "default_device": "Pixel (latest)",
+      "default_os_version": "Android (latest)",
+      "min_api_level": 28
+    },
+    "flutter": { "enabled": false }
+  },
+
+  "backend": {
+    "pytest_enabled": false
+  },
+
+  "publish_regression": {
+    "enabled": false
+  },
+
+  "language": {
+    "primary": "zh-TW",
+    "secondary": "en"
+  },
+
+  "workflow": {
+    "auto_cross_platform_check": true,
+    "auto_a11y_pairing": false,
+    "auto_root_cause_depth": { "ios": "suggestion-only", "android": "suggestion-only" }
+  }
+}

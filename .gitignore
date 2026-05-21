@@ -1,0 +1,56 @@
+# ============================================================
+# QA_Claude_Skill .gitignore
+# ============================================================
+
+# ─── 個人設定（含真實 ID、Account ID、Slack Channel IDs）────
+# 永遠不要 commit！用 config.example.json 當範本
+config/config.json
+config/config.local.json
+
+# Skill 內的 local override（如有）
+skills/**/config.local.json
+
+# 個人測試殘留
+/tmp/qa-skill-render-test/
+/tmp/qa-test-*/
+/tmp/preview/
+
+# ─── 系統檔 ─────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ─── 編輯器 ─────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.history/
+
+# ─── 套件管理（若未來加 npm/python）─────────────────────────
+node_modules/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# ─── 日誌 ───────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ─── 環境變數 ────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ─── 備份檔 ─────────────────────────────────────────────────
+*.bak
+*.backup
+*.orig
