@@ -11,6 +11,8 @@ argument-hint: "[pytest 檔路徑 / 模組名] [--from-tc <Sheet>] [--from-mutat
 > ⚙️ **執行前先讀 [`modules/config-loader.md`](./modules/config-loader.md)**。
 > 啟用條件：`backend.pytest_enabled = true` 且 `backend.property_based.enabled = true`。
 
+> 💡 **第一次聽到 property-based testing？** 先看 [`concept-zh.md`](./concept-zh.md) 中文入門導讀（5 分鐘看完搞懂概念）。
+
 ## 為什麼要這個 skill
 
 **Example-based test**（你現在的 pytest）= 寫死 1-2 個 input + 預期值。
