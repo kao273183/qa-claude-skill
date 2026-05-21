@@ -1,167 +1,258 @@
-# QA Claude Skill — 通用 QA 工作流 Skill 套件
+<h1 align="center">QA Claude Skill</h1>
 
-> A portable, configurable QA skill suite for Claude Code.
-> 從個人版本（含 JIRA UOP / Slack / Google Drive 等硬編碼）抽離出的通用版本，套用 `config.json` 後即可在任何團隊使用。
+<p align="center">
+  <em>15 production-grade QA workflow skills for Claude Code — from spec to release.</em>
+</p>
 
-[English version](./README.en.md)
+<p align="center">
+  <strong>English</strong> · <a href="README.zh-TW.md">繁體中文</a>
+</p>
 
----
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+  <img src="https://img.shields.io/badge/skills-15-2563EB" alt="15 skills" />
+  <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code Compatible" />
+  <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 modes" />
+  <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW-FB923C" alt="Bilingual" />
+</p>
 
-## 🎯 套件包含
-
-15 個 QA 專業 Skill，覆蓋從規格到自動化的完整測試生命週期：
-
-| 類別 | Skill | 用途 |
-|------|-------|------|
-| **測試設計** | `test-master` | 完整測試計劃 + 黑箱/白箱 TC 生成（原生 iOS/Android） |
-| | `flutter-test-master` | Flutter 三層測試（Unit/Widget/Integration）+ Golden |
-| | `test-review` | TC 與測試程式碼審查（10 維度評分） |
-| | `regression-test` | Release 跨平台回歸測試計劃 |
-| | `speckit-to-tc` | Spec Kit / SDD 規格 → TC 草稿 |
-| | `tc-version-diff` | TC 版本差異 + 補測清單 |
-| | `sheet-md-sync` | Google Sheet ↔ Markdown 雙向同步 |
-| | `smoke-test-analyzer` | Daily Smoke CI 測試篩選 |
-| **自動化** | `test-automation` | iOS (XCUITest) / Android (Espresso) |
-| | `flutter-test-automation` | Flutter Dart 自動化腳本 |
-| | `tc-to-pytest` | 白箱 API TC → pytest 三件套 |
-| **Bug 管理** | `bug-report` | RIDER 格式 Bug 報告 + JIRA 自動建單 |
-| **品質量化** | `mutation-testing` | mutmut 變異測試 |
-| | `property-based-test-gen` | hypothesis property-based / fuzz test |
-| **報告發布** | `publish-regression` | 回歸報告發布至 S3 Dashboard |
+> A configurable suite of **15 QA skills** for [Claude Code](https://claude.ai/code), covering the
+> full test lifecycle: **spec → TC → automation → review → regression → publish**.
+> Extracted from a personal QA workspace and generalized via `config.json` —
+> drop in your team's IDs and it works in any team, any tool stack.
 
 ---
 
-## 🚀 快速開始
+## ✨ Highlights
 
-### 1. 複製設定範本
+- 🧪 **Full lifecycle coverage** — Spec parsing, TC design, automation generation, code review, regression planning, bug filing, mutation testing, and dashboard publishing
+- 🔌 **Tool-agnostic via 3 modes** — `full-mcp` (Atlassian + Slack + Google) / `partial-mcp` (degrade gracefully when tools missing) / `markdown-only` (zero external dependencies)
+- 🌐 **Bilingual** — Every skill ships with `SKILL.md` (zh-TW) + `SKILL.en.md`; 4 concept guides in 繁中 for unfamiliar topics
+- 📦 **One-config customization** — 28 variables in `config.json` cover JIRA / Slack / Google / iOS / Android / BE pytest / AWS dashboard
+- 🧩 **Pluggable modules** — Each skill has `modules/{config-loader, jira/slack-integration, markdown-fallback}.md` for clean separation
+- 🚀 **One-command install** — `./install.sh` validates config, renders 28 placeholders, backs up existing skills, installs to `~/.claude/skills/`
+- 🇹🇼 **Designed in Taiwan, ready for global teams** — Includes a11y mandatory checks (Dynamic Type / TalkBack / contrast) and cross-platform pairing baked into every skill
+
+---
+
+## 📦 What's in the box
+
+15 skills across 5 categories:
+
+### Test Design (8)
+
+| Skill | Purpose |
+|-------|---------|
+| [`test-master`](skills/test-master/) | Full test plan + black-box/white-box TC generation (native iOS/Android) |
+| [`flutter-test-master`](skills/flutter-test-master/) | Flutter 3-tier pyramid (Unit/Widget/Integration) + Golden + Platform Channel |
+| [`test-review`](skills/test-review/) | TC + code review on 10 weighted dimensions; supports Swift/Kotlin/Dart/Python |
+| [`regression-test`](skills/regression-test/) | Release-level cross-platform regression plans (JIRA + historical bug analysis) |
+| [`speckit-to-tc`](skills/speckit-to-tc/) | Spec Kit / SDD spec → 14-column BB+WB TC draft |
+| [`tc-version-diff`](skills/tc-version-diff/) | Diff TC versions; produce changelog + retest checklist |
+| [`sheet-md-sync`](skills/sheet-md-sync/) | Two-way sync between Google Sheet ↔ Markdown (for git diff / PR review) |
+| [`smoke-test-analyzer`](skills/smoke-test-analyzer/) | Tier existing automated tests into T0/T1/T2/T3 + generate CI configs |
+
+### Automation (3)
+
+| Skill | Purpose |
+|-------|---------|
+| [`test-automation`](skills/test-automation/) | iOS (Swift Testing + XCUITest) / Android (JUnit + Espresso + Mockk) script generation |
+| [`flutter-test-automation`](skills/flutter-test-automation/) | Dart automation scripts (flutter_test / integration_test / Patrol / Golden) |
+| [`tc-to-pytest`](skills/tc-to-pytest/) | White-box API TC → pytest-api-kit triplet (`schemas.py` + `conftest.py` + `tests/test_*_api.py`) |
+
+### Bug Management (1)
+
+| Skill | Purpose |
+|-------|---------|
+| [`bug-report`](skills/bug-report/) | RIDER-format bug reports + auto-create JIRA + Slack notification + cross-platform pairing |
+
+### Quality Quantification (2)
+
+| Skill | Purpose |
+|-------|---------|
+| [`mutation-testing`](skills/mutation-testing/) | mutmut mutation testing — quantify TC strength beyond line coverage |
+| [`property-based-test-gen`](skills/property-based-test-gen/) | Generate hypothesis @given strategies to auto-explore boundary bugs |
+
+### Reporting (1)
+
+| Skill | Purpose |
+|-------|---------|
+| [`publish-regression`](skills/publish-regression/) | Publish manual regression reports to S3 + invalidate CloudFront + Slack notification |
+
+> 💡 **First time hearing of mutation testing / property-based testing / spec-driven dev / test tiering?**
+> Each has a 5-minute Chinese intro at `skills/<name>/concept-zh.md`. See [Concept Guides](#-concept-guides).
+
+---
+
+## 🚀 Quick start
 
 ```bash
+# 1. Clone
+git clone https://github.com/kao273183/qa-claude-skill.git ~/Desktop/QA_Claude_Skill
 cd ~/Desktop/QA_Claude_Skill
+
+# 2. Create your config
 cp config/config.example.json config/config.json
+
+# 3. Fill in the 4 minimum fields:
+#    - jira.instance_url
+#    - jira.project_key
+#    - platforms.ios.default_device
+#    - platforms.android.default_device
+
+# 4. Install (renders 28 placeholders → ~/.claude/skills/)
+./install.sh
+
+# 5. In Claude Code, try a trigger phrase:
+#    "Generate test plan for feature X"
+#    "Write a bug report for this crash"
+#    "Review these test cases"
 ```
 
-### 2. 填入你的組織資訊
-
-打開 `config/config.json`，至少填入：
-
-```json
-{
-  "jira": {
-    "instance_url": "https://your-company.atlassian.net",
-    "project_key": "YOUR_PROJECT",
-    "reviewer_account_id": "你的 Atlassian Account ID"
-  },
-  "slack": {
-    "user_id": "你的 Slack User ID（用於 DM）",
-    "bug_channel_id": "Bug 通知頻道 ID"
-  }
-}
-```
-
-詳細欄位說明見 [`docs/customization-guide.md`](./docs/customization-guide.md)。
-
-### 3. 安裝到 Claude Code
+### Dry-run before installing
 
 ```bash
-./install.sh
-```
-
-腳本會：
-- 把 `skills/*` 套用 config.json 後複製到 `~/.claude/skills/`
-- 備份你現有的同名 skill 到 `~/.claude/skills.backup-{時間戳}/`
-- 提示尚未填寫的設定欄位
-
-### 4. 驗證
-
-在 Claude Code 中輸入 `/test-master` 或任一觸發詞，確認 Skill 正常載入。
-
----
-
-## 🧩 工具整合模式
-
-每個 Skill 支援 3 種運作模式，由 `config.json#mode` 控制：
-
-| 模式 | 適用場景 | 行為 |
-|------|---------|------|
-| `full-mcp` | 你有 atlassian/slack/google MCP | 自動建單、發通知、寫 Sheet |
-| `partial-mcp` | 只有部分工具 | 有 MCP 就用，沒有就走 Markdown fallback |
-| `markdown-only` | 純文件輸出 | 不呼叫任何 MCP，產出 `.md` 報告 |
-
-預設範本見 `config/presets/`。
-
----
-
-## 📂 目錄結構
-
-```
-QA_Claude_Skill/
-├── README.md                  ← 中文總覽（本檔案）
-├── README.en.md               ← English overview
-├── INSTALL.md                 ← 安裝指南
-├── install.sh                 ← 一鍵安裝
-├── uninstall.sh               ← 移除已安裝的 skill
-├── config/
-│   ├── config.example.json    ← 設定範本（複製為 config.json）
-│   ├── config.schema.json     ← JSON Schema 校驗
-│   └── presets/               ← 預設情境
-│       ├── full-stack.json    ← JIRA + Slack + Google 全套
-│       ├── jira-only.json     ← 只用 JIRA
-│       └── markdown-only.json ← 純文件
-├── skills/                    ← 16 個通用化 Skill
-│   └── {skill-name}/
-│       ├── SKILL.md           ← 繁中（含 {{變數}} 佔位符）
-│       ├── SKILL.en.md        ← 英文版
-│       ├── templates.md       ← 範本檔
-│       ├── modules/           ← 可插拔整合
-│       │   ├── jira-integration.md
-│       │   ├── slack-integration.md
-│       │   └── markdown-fallback.md
-│       └── ...
-├── docs/
-│   ├── customization-guide.md ← 替換變數教學
-│   ├── skill-index.md         ← 觸發詞速查
-│   ├── workflow-diagrams.md   ← Skill 串接圖
-│   └── migration-from-personal.md
-└── examples/
-    ├── jira-acme-corp/        ← 虛構公司範例
-    └── solo-developer/        ← 單人開發者最小配置
+CLAUDE_SKILLS_DIR=/tmp/preview ./install.sh
+ls /tmp/preview/   # 15 skill directories
+grep -r '{{' /tmp/preview/ | grep -v '變數'   # should be empty
 ```
 
 ---
 
-## 🔧 變數佔位符對照表
+## 🎛 The 3 modes
 
-通用化主要替換以下 4 大類：
+Each skill works in all 3 modes; pick the one that matches your team's tooling:
 
-| 類別 | 變數 | 用途 |
-|------|------|------|
-| **JIRA** | `{{JIRA_PROJECT_KEY}}` | 專案 Key（如 `PROJ`） |
-| | `{{JIRA_INSTANCE_URL}}` | Atlassian 實例 URL |
-| | `{{JIRA_REVIEWER_ACCOUNT_ID}}` | 驗收者 Account ID |
-| | `{{JIRA_REVIEWER_FIELD}}` | 自訂欄位 ID（如 `customfield_10045`） |
-| | `{{JIRA_BUG_ISSUE_TYPE_ID}}` | Bug Issue Type ID |
-| **Slack** | `{{SLACK_USER_ID}}` | DM 通知對象 |
-| | `{{SLACK_BUG_CHANNEL_ID}}` | Bug Channel |
-| **Google** | `{{GSHEET_TC_TEMPLATE_ID}}` | TC 模板 Sheet ID |
-| | `{{GDRIVE_QA_FOLDER_ID}}` | QA 測試用例資料夾 ID |
-| | `{{GSHEET_RELEASE_SCHEDULE_ID}}` | Release Schedule Sheet ID |
-| **平台預設** | `{{IOS_DEFAULT_DEVICE}}` | 預設 iOS 測試裝置 |
-| | `{{IOS_DEFAULT_VERSION}}` | 預設 iOS 版本 |
-| | `{{ANDROID_DEFAULT_DEVICE}}` | 預設 Android 測試裝置 |
-| | `{{ANDROID_DEFAULT_VERSION}}` | 預設 Android 版本 |
-| | `{{MIN_IOS_VERSION}}` | App 最低 iOS 支援 |
-| | `{{MIN_ANDROID_API}}` | App 最低 Android API |
-| | `{{IOS_REPO}}` | iOS GitHub repo（`org/repo`） |
-| | `{{ANDROID_REPO}}` | Android GitHub repo |
+| Mode | When to use | Behavior |
+|------|-------------|----------|
+| `full-mcp` | You have Atlassian + Slack + Google Workspace MCPs installed | Auto-creates tickets, sends Slack notifications, writes Sheets |
+| `partial-mcp` | Some MCPs missing | Uses MCPs when available, falls back to Markdown otherwise |
+| `markdown-only` | Solo developer / no MCP / pure documentation flow | Zero external calls; produces `.md` reports under `.claude/testing/` |
 
-完整列表見 `config/config.schema.json`。
+3 ready-to-use presets ship in [`config/presets/`](config/presets/) — copy one and edit:
+
+```bash
+cp config/presets/full-stack.json     config/config.json   # All MCPs
+cp config/presets/jira-only.json      config/config.json   # JIRA only
+cp config/presets/markdown-only.json  config/config.json   # Pure docs
+```
 
 ---
 
-## 📝 授權
+## ⚙️ Customization
 
-MIT License — 自由使用、修改、分發。
+Three layers of configurability:
 
-## 🙏 致謝
+1. **`config.json`** — 28 variables. See [docs/customization-guide.md](docs/customization-guide.md) for the full mapping.
+2. **`config/presets/`** — 3 starter scenarios (full-stack / jira-only / markdown-only)
+3. **Per-skill modules** — Each skill has `modules/markdown-fallback.md` defining degraded behavior
 
-本套件抽離自 Jack Kao 的個人 Claude Code QA workspace，感謝原版迭代過程中協作的工程師、測試夥伴與 AI 夥伴（Claude / Codex / Gemini）。
+### Example configurations
+
+- 🏢 [Large team — ACME Corp](examples/jira-acme-corp/config.json) — Full JIRA + Slack + Google + AWS dashboard
+- 👤 [Solo developer](examples/solo-developer/config.json) — Pure Markdown, no external deps
+
+### Migrating from a personal version with hardcoded IDs?
+
+See [docs/migration-from-personal.md](docs/migration-from-personal.md) for the full mapping table.
+
+---
+
+## 🧩 Architecture
+
+Each skill follows the same pluggable structure:
+
+```
+skills/<skill-name>/
+├── SKILL.md                          ← Main spec (zh-TW)
+├── SKILL.en.md                       ← English mirror
+├── concept-zh.md                     ← Beginner intro (for unfamiliar topics)
+├── examples.md                       ← 3-5 real usage scenarios
+├── templates.md / patterns.md        ← Templates / code patterns
+└── modules/                          ← Pluggable integrations
+    ├── config-loader.md              ← Load config.json values
+    ├── jira-integration.md           ← (optional) JIRA MCP calls
+    ├── slack-integration.md          ← (optional) Slack MCP calls
+    └── markdown-fallback.md          ← Pure Markdown degradation path
+```
+
+This means:
+- **Removing JIRA?** Delete `modules/jira-integration.md` references — Slack still works.
+- **No Google?** Switch to `markdown-only` mode — every skill stays functional.
+- **Adding a new tool integration?** Add `modules/<your-tool>.md` and reference it from `SKILL.md`.
+
+---
+
+## 📖 Concept Guides
+
+For unfamiliar testing concepts, ship-in 繁中 quick reads (5 min each):
+
+| Concept | What's it about | Guide |
+|---------|-----------------|-------|
+| **Property-based testing** | Why fuzzing 200 inputs beats writing 2 examples | [property-based-test-gen/concept-zh.md](skills/property-based-test-gen/concept-zh.md) |
+| **Mutation testing** | Why 100% line coverage isn't enough | [mutation-testing/concept-zh.md](skills/mutation-testing/concept-zh.md) |
+| **Spec-Driven Dev (Spec Kit)** | Why spec ticket → 30-second TC draft is possible | [speckit-to-tc/concept-zh.md](skills/speckit-to-tc/concept-zh.md) |
+| **Test tiering (T0/T1/T2/T3)** | Why running all tests on every PR is wasteful | [smoke-test-analyzer/concept-zh.md](skills/smoke-test-analyzer/concept-zh.md) |
+
+---
+
+## 🌊 Typical workflows
+
+See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of:
+
+1. **Spec → Release pipeline (BE feature)** — `speckit-to-tc` → `test-review` → `sheet-md-sync` → `tc-to-pytest` → `mutation-testing` → `property-based-test-gen`
+2. **Pre-release prep (mobile)** — `test-master` → `test-automation` → `smoke-test-analyzer` → `regression-test` → `bug-report` → `publish-regression`
+3. **TC version bump** — `test-master --quick` → `test-review` → `tc-version-diff` → `tc-to-pytest --incremental`
+4. **Markdown-only flow (solo dev)** — All skills produce `.md` under `.claude/testing/`
+5. **Tri-party review** — Claude + Codex + Gemini reviewing the same TC, with weighted consensus
+
+---
+
+## 🧰 Compatibility
+
+| What | Requirements |
+|------|--------------|
+| **Claude Code** | Latest (skills are first-class) |
+| **OS** | macOS / Linux (Windows: use WSL) |
+| **MCP servers (optional)** | atlassian, slack, google-workspace, mcp-google-full, mcp-context-mode |
+| **Required CLI tools** | `bash`, `jq`, `git` |
+| **Optional CLI tools** | `gh` (GitHub Actions), `aws` (S3 publish), `python3` + `pytest` (BE skills), `flutter` (Flutter skills), `xcodebuild` (iOS), Gradle (Android) |
+
+---
+
+## 🗺 Roadmap
+
+- [ ] Windows native support (currently requires WSL)
+- [ ] CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)
+- [ ] Built-in schema validation via `ajv-cli`
+- [ ] More language support: 日本語 / 简体中文
+- [ ] More presets: startup / enterprise / government
+- [ ] Web UI for config editing
+- [ ] Skill telemetry (anonymous usage stats to improve defaults)
+
+---
+
+## 🤝 Contributing
+
+PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- How to add a new skill
+- How to contribute translations
+- How to modify existing skills
+- PR checklist
+
+---
+
+## 📝 License
+
+[MIT](LICENSE) — use, modify, redistribute freely. Attribution appreciated.
+
+## 🙏 Credits
+
+Extracted from Jack Kao's personal Claude Code QA workspace iterated since 2025.
+Thanks to the engineers, QA peers, and AI collaborators (Claude / Codex / Gemini) who shaped the original version.
+
+---
+
+<p align="center">
+  Made with ❤️ for QA teams who want to focus on quality, not paperwork.
+</p>
