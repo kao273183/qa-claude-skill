@@ -11,6 +11,8 @@ argument-hint: "[optional: platform (ios/android/both) or specific test director
 > ⚙️ **Read [`modules/config-loader.md`](./modules/config-loader.md) first**.
 > If `mode = markdown-only`, output reports to local `.md` instead of Google Sheet.
 
+> 💡 **第一次聽到 T0/T1/T2/T3 分層？** 先看 [`concept-zh.md`](./concept-zh.md) 中文入門導讀（5 分鐘搞懂「為什麼不該每次 PR 都跑全部測試」）。
+
 Analyze existing automated tests to curate the optimal Daily Smoke subset for CI. Supports iOS and Android.
 
 ## Why This Matters

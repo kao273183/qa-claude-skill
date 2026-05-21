@@ -11,6 +11,8 @@ argument-hint: "[JIRA 票號 / spec 檔路徑 / ticket URL]"
 > ⚙️ **執行前先讀 [`modules/config-loader.md`](./modules/config-loader.md)**。
 > 啟用條件：`config.speckit.enabled = true`。
 
+> 💡 **第一次聽到 Spec Kit / SDD？** 先看 [`concept-zh.md`](./concept-zh.md) 中文入門導讀（5 分鐘搞懂「為什麼規格寫好可以一鍵變 TC」）。
+
 ## 適用場景
 
 - ✅ Jira 上一個「spec 規格制定」ticket 剛 close

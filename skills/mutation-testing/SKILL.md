@@ -11,6 +11,8 @@ argument-hint: "[pytest 目標 dir / test 檔路徑] [--config | --run | --repor
 > ⚙️ **執行前先讀 [`modules/config-loader.md`](./modules/config-loader.md)**。
 > 啟用條件：`config.backend.pytest_enabled = true` 且 `backend.mutation.enabled = true`。
 
+> 💡 **第一次聽到變異測試？** 先看 [`concept-zh.md`](./concept-zh.md) 中文入門導讀（5 分鐘搞懂「為什麼行覆蓋率 100% 也不夠」）。
+
 ## 為什麼要這個 skill
 
 行覆蓋率（line coverage）只回答「程式碼有沒有被執行到」，不回答「**TC 真的能抓出 bug 嗎**」。
