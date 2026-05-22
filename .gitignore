@@ -54,3 +54,6 @@ yarn-error.log*
 *.bak
 *.backup
 *.orig
+
+# Marketing materials (private, not for public repo)
+marketing/
