@@ -1,0 +1,62 @@
+name: 🛡 Trademark Question / Request
+description: Request permission to use the "QA Claude Skill" name in a specific way
+title: "[Trademark] "
+labels: ["trademark-question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        See [TRADEMARK.md](../blob/main/TRADEMARK.md) for the full trademark policy.
+
+        Use this template if you want to:
+        - Name a fork / derivative work
+        - Register a domain or social media handle containing the name
+        - Use the name in a paid product / service
+        - Imply endorsement of any kind
+
+  - type: textarea
+    id: intended-use
+    attributes:
+      label: Intended use
+      description: Where will the name appear?
+      placeholder: |
+        - Product / service name
+        - Domain / URL
+        - Course / training material
+        - Social media handle
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why do you need to use this specific name (and not an alternative)?
+      placeholder: |
+        We're building a CI integration that helps users install qa-claude-skill more easily,
+        and want to call it "QA Claude Skill Installer".
+    validations:
+      required: true
+
+  - type: dropdown
+    id: nature
+    attributes:
+      label: Commercial or non-commercial?
+      options:
+        - Non-commercial / open-source
+        - Commercial (paid product or service)
+    validations:
+      required: true
+
+  - type: input
+    id: duration
+    attributes:
+      label: Duration of use
+      placeholder: e.g. permanent / 1 year / event-specific
+
+  - type: input
+    id: contact
+    attributes:
+      label: Contact (name + role)
+    validations:
+      required: true

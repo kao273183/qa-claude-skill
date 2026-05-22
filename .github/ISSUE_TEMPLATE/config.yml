@@ -1,0 +1,22 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: 💡 Have an idea? Discuss it first
+    url: https://github.com/kao273183/qa-claude-skill/discussions/categories/ideas
+    about: For new skill ideas or improvements, please start a Discussion in the Ideas category — it's easier to gather feedback before formalizing.
+
+  - name: 🙏 Question / How do I...
+    url: https://github.com/kao273183/qa-claude-skill/discussions/categories/q-a
+    about: Use Q&A Discussions for usage questions. Tag the maintainer for faster reply.
+
+  - name: 🙌 Show how you're using it
+    url: https://github.com/kao273183/qa-claude-skill/discussions/categories/show-and-tell
+    about: Sharing your team's adoption story / customization helps the community.
+
+  - name: 🔒 Security vulnerability
+    url: https://github.com/kao273183/qa-claude-skill/security/advisories/new
+    about: For non-public security issues, use GitHub Security Advisory (private). See SECURITY.md.
+
+  - name: 📖 Documentation
+    url: https://github.com/kao273183/qa-claude-skill#readme
+    about: Check README, docs/, and ROADMAP.md first — your answer might be there.

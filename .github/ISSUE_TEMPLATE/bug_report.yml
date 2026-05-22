@@ -1,0 +1,114 @@
+name: 🐛 Bug Report
+description: Report a bug in install scripts, validation, or a specific skill
+title: "[Bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the details below so we can reproduce and fix it.
+
+        > **Security issues** — please don't post them here. Use [GitHub Security Advisory](https://github.com/kao273183/qa-claude-skill/security/advisories/new).
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Which component?
+      description: Where did you encounter the bug?
+      options:
+        - install.sh / install.ps1
+        - scripts/validate-config.sh / .ps1
+        - A specific skill (please specify in description)
+        - config / preset files
+        - CI/CD templates
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Which version are you using? (e.g. v1.6.2)
+      placeholder: v1.6.2
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - macOS
+        - Linux (Ubuntu / Debian / Fedora / etc)
+        - Windows (PowerShell)
+        - Windows (Git Bash / MSYS)
+        - Windows (WSL)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      description: What's your `config.json#mode`?
+      options:
+        - full-mcp
+        - partial-mcp
+        - markdown-only
+        - Not yet configured
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug. What did you expect, what actually happened?
+      placeholder: |
+        I ran `./install.sh` and got error XYZ.
+        Expected: skills installed to ~/.claude/skills/
+        Actual: script failed at line 42 with "command not found: jq"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: Step-by-step commands
+      placeholder: |
+        1. cp config/config.example.json config/config.json
+        2. (no changes)
+        3. ./install.sh
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Error output
+      description: Paste the full error output (REDACT any tokens / IDs first!)
+      render: shell
+    validations:
+      required: false
+
+  - type: input
+    id: claude-code-version
+    attributes:
+      label: Claude Code version
+      placeholder: 1.x.x
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I ran `./scripts/validate-config.sh` and the issue persists
+          required: false
+        - label: I checked [docs/](../tree/main/docs) and didn't find an answer
+          required: true
+        - label: I REDACTED all real tokens / IDs / personal info before posting
+          required: true

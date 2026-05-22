@@ -1,0 +1,120 @@
+name: 🚀 New Skill Proposal
+description: Suggest adding a new QA skill to the suite
+title: "[New Skill] "
+labels: ["new-skill", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Want to propose a new skill? Thanks! Please describe the value first, then we'll discuss feasibility.
+
+        > For **ideas still in discussion**, consider starting a [Discussion](https://github.com/kao273183/qa-claude-skill/discussions/categories/ideas) first to gather community feedback.
+
+  - type: input
+    id: skill-name
+    attributes:
+      label: Proposed skill name
+      description: Use `kebab-case`, similar to existing skills (test-master, bug-report, ...)
+      placeholder: e.g. payment-test
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which existing category does it fit, or do we need a new one?
+      options:
+        - Test Design
+        - Automation
+        - Bug Management
+        - Quality Quantification
+        - Reporting
+        - Performance & Security
+        - CI Health
+        - Quality Specialties
+        - New category (please describe)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve?
+      description: Be concrete. "I currently spend X hours on Y because Z."
+      placeholder: |
+        Every release we manually validate 30+ payment flow scenarios in iOS App Store sandbox.
+        It takes 4 hours and we always miss edge cases like "user has Apple ID but no payment method".
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: What should the skill do?
+      description: Describe the inputs, outputs, and triggers
+      placeholder: |
+        Trigger: "test payment / iAP / subscription"
+        Input: JIRA ticket or feature description
+        Output:
+        - Test scenario list (sandbox + production)
+        - Apple Server Notification handling tests
+        - Receipt validation tests
+        - Refund / chargeback edge cases
+    validations:
+      required: true
+
+  - type: textarea
+    id: who-benefits
+    attributes:
+      label: Who would benefit?
+      description: What kind of teams would use this?
+      placeholder: |
+        Teams shipping iOS / Android apps with in-app purchase
+        Subscription-based products
+        Apps integrating Stripe / Apple Pay / Google Pay
+    validations:
+      required: true
+
+  - type: textarea
+    id: existing-tools
+    attributes:
+      label: Related existing tools / skills
+      description: What does this skill replace or complement?
+      placeholder: |
+        Replaces: manual Excel checklist
+        Complements: test-master (high-level planning), bug-report (when issues found)
+
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Estimated effort (your guess)
+      options:
+        - Small (1-3 hours)
+        - Medium (4-8 hours)
+        - Large (1-2 days)
+        - Not sure
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to draft this skill as a PR
+          required: false
+        - label: I just want to propose it — maintainer or someone else can build it
+          required: false
+        - label: I'd be willing to test the skill once built
+          required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I checked [ROADMAP.md](../blob/main/ROADMAP.md) — this skill isn't already planned
+          required: true
+        - label: I checked existing skills — none of them already does this
+          required: true

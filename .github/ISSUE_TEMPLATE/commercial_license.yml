@@ -1,0 +1,104 @@
+name: 💼 Commercial License Inquiry
+description: Request a commercial license for for-profit use
+title: "[Commercial License] "
+labels: ["commercial-license"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This template is for requesting a **Commercial License**. See [licenses/COMMERCIAL.md](../blob/main/licenses/COMMERCIAL.md) for context.
+
+        Not sure if you need a commercial license? Use the [`commercial-license-question`](https://github.com/kao273183/qa-claude-skill/issues/new?labels=commercial-license-question&title=%5BQuestion%5D+) label instead.
+
+  - type: input
+    id: company-name
+    attributes:
+      label: Company name
+    validations:
+      required: true
+
+  - type: input
+    id: country
+    attributes:
+      label: Country / jurisdiction
+      description: Where will the license be governed?
+    validations:
+      required: true
+
+  - type: input
+    id: industry
+    attributes:
+      label: Industry
+      placeholder: e.g. fintech, healthcare, e-commerce
+
+  - type: dropdown
+    id: headcount
+    attributes:
+      label: Approximate headcount
+      options:
+        - 1-10
+        - 11-50
+        - 51-200
+        - 201-1000
+        - 1000+
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: intended-use
+    attributes:
+      label: Intended use (check all that apply)
+      options:
+        - label: Internal QA workflow (within company only)
+        - label: Bundled in a paid product
+        - label: Offered as a paid service (SaaS / consulting / training)
+        - label: Other (please describe in details below)
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Tell us more — which team / how many users / which features
+      placeholder: |
+        - Teams using: QA team (15 ppl) + Backend team (8 ppl)
+        - Features used: test-master, regression-test, bug-report, security-scan
+        - Estimated usage: ~50 test plans / month, daily install runs
+    validations:
+      required: true
+
+  - type: dropdown
+    id: duration
+    attributes:
+      label: Estimated duration
+      options:
+        - 1 year
+        - 2 years
+        - Multi-year (3+)
+        - Perpetual
+    validations:
+      required: true
+
+  - type: input
+    id: contact
+    attributes:
+      label: Primary contact
+      description: Name and role
+      placeholder: Jane Doe, Engineering Manager
+    validations:
+      required: true
+
+  - type: input
+    id: contact-email
+    attributes:
+      label: Contact email
+      description: Where to send the license proposal (will be kept confidential)
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else we should know (timeline, budget range, special terms needed)

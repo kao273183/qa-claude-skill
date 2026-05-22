@@ -1,0 +1,85 @@
+name: ✨ Feature Request (existing skill or core)
+description: Suggest an improvement to an existing skill, install scripts, or core feature
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Improvement to an **existing** skill, install scripts, or core? Use this.
+
+        For a **completely new skill**, use the [New Skill Proposal](./new_skill_proposal.yml) template instead.
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: What does this affect?
+      options:
+        - A specific skill
+        - install.sh / install.ps1
+        - validate-config script
+        - config.json schema
+        - CI/CD templates
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: skill-name
+    attributes:
+      label: Skill name (if applicable)
+      description: e.g. test-master, bug-report
+      placeholder: skill-name-here
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: What does it do now that you want changed?
+      placeholder: |
+        bug-report currently asks 9 environment fields one by one.
+        For mobile bugs I always fill the same defaults, but I still have to confirm each.
+    validations:
+      required: true
+
+  - type: textarea
+    id: desired-behavior
+    attributes:
+      label: Desired behavior
+      description: What should it do instead?
+      placeholder: |
+        Allow per-team default profiles in config.json — e.g.
+        "mobile-default" preset that pre-fills device/OS/env.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other ways to solve this you've thought about
+      placeholder: |
+        - Custom alias in shell
+        - Post-creation script editing
+        These work but require manual setup.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      options:
+        - Critical — I can't use the tool without this
+        - High — Significant productivity gain
+        - Medium — Nice quality-of-life improvement
+        - Low — Just an idea
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I'd be willing to submit a PR
+          required: false
