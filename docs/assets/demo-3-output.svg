@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0F2E"/>
+      <stop offset="100%" stop-color="#0B0A14"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg3)"/>
+
+  <!-- Hero title -->
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">📤 Real outputs, ready to ship</text>
+  <text x="600" y="92" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="400" fill="#A78BFA">JIRA tickets · Google Sheets · CVSS reports · pytest code · all from one prompt</text>
+
+  <!-- Three columns: JIRA / Sheet / Code -->
+
+  <!-- Column 1: JIRA Ticket -->
+  <g transform="translate(60, 130)">
+    <!-- Card frame -->
+    <rect x="0" y="0" width="360" height="540" rx="10" fill="#1F1F2A" stroke="#3F3F4F" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="360" height="44" rx="10" fill="#0052CC"/>
+    <rect x="0" y="34" width="360" height="10" fill="#0052CC"/>
+    <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">⚡ JIRA  ·  PROJ-2500</text>
+
+    <!-- Content -->
+    <g transform="translate(20, 65)" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+      <rect x="0" y="0" width="50" height="22" rx="3" fill="#DE350B"/>
+      <text x="25" y="16" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">High</text>
+
+      <rect x="55" y="0" width="36" height="22" rx="3" fill="#FF8B00"/>
+      <text x="73" y="16" text-anchor="middle" font-size="12" font-weight="600" fill="#FFFFFF">Bug</text>
+
+      <text x="0" y="45" font-size="15" font-weight="600" fill="#FFFFFF">Checkout crashes on</text>
+      <text x="0" y="65" font-size="15" font-weight="600" fill="#FFFFFF">Samsung Galaxy S24</text>
+
+      <text x="0" y="100" font-size="12" font-weight="600" fill="#9CA3AF">Reproduction Steps</text>
+      <text x="0" y="120" font-size="12" fill="#D4D4D4">1. Add 3 items to cart</text>
+      <text x="0" y="138" font-size="12" fill="#D4D4D4">2. Apply coupon code</text>
+      <text x="0" y="156" font-size="12" fill="#D4D4D4">3. Tap "Checkout"</text>
+      <text x="0" y="174" font-size="12" fill="#D4D4D4">4. App crashes</text>
+
+      <text x="0" y="205" font-size="12" font-weight="600" fill="#9CA3AF">Root Cause Analysis</text>
+      <text x="0" y="225" font-size="12" fill="#D4D4D4">PaymentManager.kt:142</text>
+      <text x="0" y="243" font-size="12" fill="#D4D4D4">— NPE on coupon.applied()</text>
+      <text x="0" y="261" font-size="12" fill="#D4D4D4">when discount = null</text>
+
+      <text x="0" y="295" font-size="12" font-weight="600" fill="#9CA3AF">Environment</text>
+      <text x="0" y="315" font-size="12" fill="#D4D4D4">• Galaxy S24 / Android 14</text>
+      <text x="0" y="333" font-size="12" fill="#D4D4D4">• App 1.9.0 (819)</text>
+      <text x="0" y="351" font-size="12" fill="#D4D4D4">• Staging</text>
+
+      <text x="0" y="385" font-size="12" font-weight="600" fill="#9CA3AF">Cross-platform check</text>
+      <text x="0" y="405" font-size="12" fill="#FCD34D">⚠ iOS verification needed</text>
+      <text x="0" y="423" font-size="11" fill="#9CA3AF">(linked: PROJ-2501)</text>
+
+      <text x="0" y="455" font-size="12" font-weight="600" fill="#9CA3AF">Slack notified</text>
+      <text x="0" y="475" font-size="12" fill="#22C55E">✓ DM @jack</text>
+      <text x="0" y="493" font-size="12" fill="#22C55E">✓ #bugs channel</text>
+    </g>
+  </g>
+
+  <!-- Column 2: Google Sheet (Test Plan) -->
+  <g transform="translate(440, 130)">
+    <rect x="0" y="0" width="360" height="540" rx="10" fill="#1F1F2A" stroke="#3F3F4F" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="360" height="44" rx="10" fill="#0F9D58"/>
+    <rect x="0" y="34" width="360" height="10" fill="#0F9D58"/>
+    <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">📊 Google Sheet  ·  Test Cases</text>
+
+    <!-- Sheet content -->
+    <g transform="translate(15, 65)" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+      <!-- Sheet headers -->
+      <rect x="0" y="0" width="330" height="22" fill="#374151"/>
+      <text x="8" y="16" font-size="11" font-weight="600" fill="#FFFFFF">ID</text>
+      <text x="75" y="16" font-size="11" font-weight="600" fill="#FFFFFF">Title</text>
+      <text x="245" y="16" font-size="11" font-weight="600" fill="#FFFFFF">P</text>
+      <text x="278" y="16" font-size="11" font-weight="600" fill="#FFFFFF">Platform</text>
+
+      <!-- Rows -->
+      <g font-size="11" fill="#D4D4D4">
+        <rect x="0" y="22" width="330" height="22" fill="#252535"/>
+        <text x="8" y="38">BB-AUTH-001</text>
+        <text x="75" y="38">Login happy path</text>
+        <rect x="240" y="26" width="22" height="14" rx="3" fill="#DE350B"/><text x="251" y="37" text-anchor="middle" font-size="10" fill="#FFF">P0</text>
+        <text x="280" y="38">Both</text>
+
+        <rect x="0" y="44" width="330" height="22" fill="#1F1F2A"/>
+        <text x="8" y="60">BB-AUTH-002</text>
+        <text x="75" y="60">Login wrong pw</text>
+        <rect x="240" y="48" width="22" height="14" rx="3" fill="#DE350B"/><text x="251" y="59" text-anchor="middle" font-size="10" fill="#FFF">P0</text>
+        <text x="280" y="60">Both</text>
+
+        <rect x="0" y="66" width="330" height="22" fill="#252535"/>
+        <text x="8" y="82">BB-AUTH-003</text>
+        <text x="75" y="82">Token expiry</text>
+        <rect x="240" y="70" width="22" height="14" rx="3" fill="#FF8B00"/><text x="251" y="81" text-anchor="middle" font-size="10" fill="#FFF">P1</text>
+        <text x="280" y="82">Both</text>
+
+        <rect x="0" y="88" width="330" height="22" fill="#1F1F2A"/>
+        <text x="8" y="104">BB-AUTH-A11Y-1</text>
+        <text x="75" y="104">VoiceOver order</text>
+        <rect x="240" y="92" width="22" height="14" rx="3" fill="#FF8B00"/><text x="251" y="103" text-anchor="middle" font-size="10" fill="#FFF">P1</text>
+        <text x="280" y="104">iOS</text>
+
+        <rect x="0" y="110" width="330" height="22" fill="#252535"/>
+        <text x="8" y="126">BB-AUTH-A11Y-2</text>
+        <text x="75" y="126">TalkBack order</text>
+        <rect x="240" y="114" width="22" height="14" rx="3" fill="#FF8B00"/><text x="251" y="125" text-anchor="middle" font-size="10" fill="#FFF">P1</text>
+        <text x="280" y="126">Android</text>
+
+        <rect x="0" y="132" width="330" height="22" fill="#1F1F2A"/>
+        <text x="8" y="148">BB-AUTH-A11Y-3</text>
+        <text x="75" y="148">Dynamic Type max</text>
+        <rect x="240" y="136" width="22" height="14" rx="3" fill="#FF8B00"/><text x="251" y="147" text-anchor="middle" font-size="10" fill="#FFF">P1</text>
+        <text x="280" y="148">Both</text>
+
+        <rect x="0" y="154" width="330" height="22" fill="#252535"/>
+        <text x="8" y="170">WB-AUTH-001</text>
+        <text x="75" y="170">JWT signature</text>
+        <rect x="240" y="158" width="22" height="14" rx="3" fill="#DE350B"/><text x="251" y="169" text-anchor="middle" font-size="10" fill="#FFF">P0</text>
+        <text x="280" y="170">BE</text>
+
+        <rect x="0" y="176" width="330" height="22" fill="#1F1F2A"/>
+        <text x="8" y="192">WB-AUTH-002</text>
+        <text x="75" y="192">Token race cond</text>
+        <rect x="240" y="180" width="22" height="14" rx="3" fill="#DE350B"/><text x="251" y="191" text-anchor="middle" font-size="10" fill="#FFF">P0</text>
+        <text x="280" y="192">BE</text>
+
+        <rect x="0" y="198" width="330" height="22" fill="#252535"/>
+        <text x="8" y="214">WB-AUTH-003</text>
+        <text x="75" y="214">SQL injection</text>
+        <rect x="240" y="202" width="22" height="14" rx="3" fill="#DE350B"/><text x="251" y="213" text-anchor="middle" font-size="10" fill="#FFF">P0</text>
+        <text x="280" y="214">BE</text>
+
+        <text x="0" y="240" fill="#9CA3AF">...</text>
+      </g>
+
+      <!-- Summary -->
+      <g transform="translate(0, 260)">
+        <rect x="0" y="0" width="330" height="170" rx="6" fill="#1A1A22" stroke="#374151" stroke-width="1"/>
+        <text x="14" y="25" font-size="13" font-weight="600" fill="#A78BFA">Summary</text>
+        <text x="14" y="48" font-size="12" fill="#D4D4D4">Black-box: 42 (10 P0 / 18 P1 / 14 P2)</text>
+        <text x="14" y="68" font-size="12" fill="#D4D4D4">White-box: 18 (2 P0 / 10 P1 / 6 P2)</text>
+        <text x="14" y="88" font-size="12" fill="#D4D4D4">a11y: 4 mandatory checks ✓</text>
+        <text x="14" y="108" font-size="12" fill="#D4D4D4">Cross-platform: 30 Both / 12 iOS / 8 Android</text>
+        <text x="14" y="135" font-size="12" font-weight="600" fill="#22C55E">✓ Pyramid balanced 70/20/10</text>
+        <text x="14" y="155" font-size="12" font-weight="600" fill="#22C55E">✓ Risk matrix covered (3 High)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Column 3: Code (pytest) -->
+  <g transform="translate(820, 130)">
+    <rect x="0" y="0" width="320" height="540" rx="10" fill="#1F1F2A" stroke="#3F3F4F" stroke-width="1"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="320" height="44" rx="10" fill="#7C3AED"/>
+    <rect x="0" y="34" width="320" height="10" fill="#7C3AED"/>
+    <text x="20" y="28" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">🐍 pytest  ·  test_auth_api.py</text>
+
+    <!-- Code content -->
+    <g transform="translate(14, 65)" font-family="'SF Mono', Menlo, Monaco, monospace" font-size="11">
+      <!-- Line numbers + code -->
+      <text x="0" y="14" fill="#6B7280">1</text>
+      <text x="20" y="14" fill="#C586C0">def</text>
+      <text x="50" y="14" fill="#DCDCAA">test_steps_sync_unauth_rejected</text>
+
+      <text x="0" y="32" fill="#6B7280">2</text>
+      <text x="20" y="32" fill="#E0E0E0">    (health_client):</text>
+
+      <text x="0" y="50" fill="#6B7280">3</text>
+      <text x="20" y="50" fill="#CE9178">    """</text>
+
+      <text x="0" y="68" fill="#6B7280">4</text>
+      <text x="20" y="68" fill="#CE9178">    對應 TC: WB-AUTH-002</text>
+
+      <text x="0" y="86" fill="#6B7280">5</text>
+      <text x="20" y="86" fill="#CE9178">    Spec: PROJ-2500</text>
+
+      <text x="0" y="104" fill="#6B7280">6</text>
+      <text x="20" y="104" fill="#CE9178">    """</text>
+
+      <text x="0" y="122" fill="#6B7280">7</text>
+      <text x="20" y="122" fill="#E0E0E0">    resp = health_client.post(</text>
+
+      <text x="0" y="140" fill="#6B7280">8</text>
+      <text x="36" y="140" fill="#CE9178">"/api/v1/auth/login",</text>
+
+      <text x="0" y="158" fill="#6B7280">9</text>
+      <text x="36" y="158" fill="#9CDCFE">json</text><text x="65" y="158" fill="#E0E0E0">={</text><text x="85" y="158" fill="#CE9178">"email"</text><text x="125" y="158" fill="#E0E0E0">: ...},</text>
+
+      <text x="0" y="176" fill="#6B7280">10</text>
+      <text x="20" y="176" fill="#E0E0E0">    )</text>
+
+      <text x="0" y="194" fill="#6B7280">11</text>
+      <text x="20" y="194" fill="#C586C0">    assert</text>
+      <text x="78" y="194" fill="#9CDCFE">resp</text><text x="105" y="194" fill="#E0E0E0">.</text><text x="110" y="194" fill="#DCDCAA">status_code</text>
+
+      <text x="0" y="212" fill="#6B7280">12</text>
+      <text x="38" y="212" fill="#E0E0E0">== </text><text x="60" y="212" fill="#B5CEA8">401</text>
+    </g>
+
+    <!-- Separator -->
+    <line x1="14" y1="290" x2="306" y2="290" stroke="#374151" stroke-dasharray="3,3"/>
+
+    <!-- Generated assets summary -->
+    <g transform="translate(14, 310)" font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+      <text x="0" y="14" font-size="13" font-weight="600" fill="#A78BFA">Generated assets</text>
+
+      <text x="0" y="40" font-size="11" font-weight="600" fill="#E0E0E0">utils/schemas.py</text>
+      <text x="0" y="56" font-size="11" fill="#9CA3AF">  + AUTH_LOGIN schema</text>
+      <text x="0" y="72" font-size="11" fill="#9CA3AF">  + AUTH_TOKEN_REFRESH schema</text>
+
+      <text x="0" y="98" font-size="11" font-weight="600" fill="#E0E0E0">conftest.py</text>
+      <text x="0" y="114" font-size="11" fill="#9CA3AF">  + auth_client fixture</text>
+      <text x="0" y="130" font-size="11" fill="#9CA3AF">  + auth_authenticated_client fixture</text>
+
+      <text x="0" y="156" font-size="11" font-weight="600" fill="#E0E0E0">tests/test_auth_api.py</text>
+      <text x="0" y="172" font-size="11" fill="#9CA3AF">  + 12 test functions</text>
+      <text x="0" y="188" font-size="11" fill="#9CA3AF">  + Bidirectional TC ↔ pytest map</text>
+
+      <line x1="0" y1="200" x2="290" y2="200" stroke="#374151" stroke-dasharray="3,3"/>
+
+      <text x="0" y="220" font-size="11" font-weight="600" fill="#22C55E">✓ pytest collect → 12 tests</text>
+      <text x="0" y="236" font-size="11" font-weight="600" fill="#22C55E">✓ Ready for UAT</text>
+    </g>
+  </g>
+
+  <!-- Bottom strip -->
+  <g transform="translate(80, 695)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#A78BFA">📦 From "I want to test X" → JIRA + Sheet + pytest in minutes (not hours)</text>
+    <text x="1040" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">github.com/kao273183/qa-claude-skill</text>
+  </g>
+</svg>

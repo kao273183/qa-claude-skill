@@ -24,6 +24,19 @@
 
 ---
 
+## 👀 跑起來長這樣
+
+### ⚡ 一鍵安裝
+![安裝示意](docs/assets/demo-1-install.png)
+
+### 💬 自然語言觸發 skill
+![Claude Code 互動示意](docs/assets/demo-2-claude-code.png)
+
+### 📤 真實產出（不是 mock）
+![輸出示意](docs/assets/demo-3-output.png)
+
+---
+
 ## ✨ 設計亮點
 
 - 🧪 **完整生命週期覆蓋** — 規格解析、TC 設計、自動化生成、程式碼審查、回歸計劃、Bug 開單、變異測試、報告發布

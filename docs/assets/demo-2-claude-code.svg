@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0F2E"/>
+      <stop offset="100%" stop-color="#0B0A14"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="720" fill="url(#bg2)"/>
+
+  <!-- Hero title -->
+  <text x="600" y="60" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">💬 Natural-language triggers</text>
+  <text x="600" y="92" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="400" fill="#A78BFA">Just say what you want — Claude Code activates the right skill</text>
+
+  <!-- Claude Code window -->
+  <g transform="translate(80, 130)">
+    <rect x="0" y="0" width="1040" height="540" rx="10" fill="#0F0F12" stroke="#2A2A2A" stroke-width="1"/>
+
+    <!-- Title bar -->
+    <rect x="0" y="0" width="1040" height="36" rx="10" fill="#1A1A1F"/>
+    <rect x="0" y="26" width="1040" height="10" fill="#1A1A1F"/>
+    <circle cx="20" cy="18" r="6" fill="#FF5F57"/>
+    <circle cx="40" cy="18" r="6" fill="#FEBC2E"/>
+    <circle cx="60" cy="18" r="6" fill="#28C840"/>
+
+    <!-- Anthropic logo + title -->
+    <text x="520" y="23" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="500" fill="#A0A0A0">Claude Code — qa-claude-skill</text>
+
+    <!-- Chat messages -->
+    <g font-family="-apple-system, BlinkMacSystemFont, sans-serif">
+
+      <!-- User message 1 -->
+      <g transform="translate(20, 65)">
+        <rect x="0" y="0" width="36" height="36" rx="18" fill="#7C3AED"/>
+        <text x="18" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">U</text>
+        <text x="56" y="14" font-size="13" font-weight="600" fill="#A0A0A0">You</text>
+        <text x="56" y="36" font-size="16" fill="#FFFFFF">I want to file a bug — the checkout crashes on Android</text>
+      </g>
+
+      <!-- Claude response 1 -->
+      <g transform="translate(20, 130)">
+        <rect x="0" y="0" width="36" height="36" rx="6" fill="#D97757"/>
+        <text x="18" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">C</text>
+        <text x="56" y="14" font-size="13" font-weight="600" fill="#A0A0A0">Claude  ·  bug-report skill activated</text>
+        <text x="56" y="38" font-size="15" fill="#FFFFFF">I'll walk you through the RIDER bug report format.</text>
+        <text x="56" y="62" font-size="15" fill="#E0E0E0">First, let me check JIRA for duplicates...</text>
+
+        <!-- Inline tool box -->
+        <g transform="translate(56, 80)">
+          <rect x="0" y="0" width="600" height="50" rx="6" fill="#1F1F24" stroke="#7C3AED" stroke-opacity="0.5" stroke-width="1"/>
+          <text x="14" y="22" font-family="ui-monospace, monospace" font-size="12" fill="#A78BFA">🔍 mcp__atlassian__searchJiraIssuesUsingJql</text>
+          <text x="14" y="40" font-family="ui-monospace, monospace" font-size="11" fill="#9CA3AF">project = PROJ AND summary ~ "checkout crash" AND status != Done</text>
+        </g>
+
+        <text x="56" y="166" font-size="15" fill="#22C55E">✓ Found 0 duplicates. Now let's gather environment info:</text>
+
+        <text x="56" y="195" font-size="14" fill="#FFFFFF">📱 Which Android device?</text>
+        <text x="80" y="217" font-size="13" fill="#9CA3AF">Default: Pixel 8 (from config) — type a different one if needed</text>
+      </g>
+
+      <!-- User typing -->
+      <g transform="translate(20, 375)">
+        <rect x="0" y="0" width="36" height="36" rx="18" fill="#7C3AED"/>
+        <text x="18" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">U</text>
+        <text x="56" y="14" font-size="13" font-weight="600" fill="#A0A0A0">You</text>
+        <text x="56" y="36" font-size="16" fill="#FFFFFF">Samsung Galaxy S24, Android 14, App v1.9.0</text>
+      </g>
+
+      <!-- Claude next step preview -->
+      <g transform="translate(20, 440)">
+        <rect x="0" y="0" width="36" height="36" rx="6" fill="#D97757"/>
+        <text x="18" y="24" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF">C</text>
+        <text x="56" y="14" font-size="13" font-weight="600" fill="#A0A0A0">Claude</text>
+        <text x="56" y="36" font-size="14" fill="#9CA3AF" font-style="italic">Doing root-cause analysis from git history...</text>
+      </g>
+
+      <!-- Input box -->
+      <g transform="translate(20, 490)">
+        <rect x="0" y="0" width="1000" height="34" rx="8" fill="#1F1F24" stroke="#3F3F46" stroke-width="1"/>
+        <text x="14" y="22" font-size="14" fill="#6B7280">Type a message...</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Bottom strip -->
+  <g transform="translate(80, 695)">
+    <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#A78BFA">🐛 bug-report · RIDER format · auto JIRA · Slack notify · 1-conversation handoff</text>
+    <text x="1040" y="0" text-anchor="end" font-family="ui-monospace, monospace" font-size="12" fill="#6B7280">github.com/kao273183/qa-claude-skill</text>
+  </g>
+</svg>

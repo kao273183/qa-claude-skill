@@ -24,6 +24,19 @@
 
 ---
 
+## 👀 See it in action
+
+### ⚡ One-command install
+![Install demo](docs/assets/demo-1-install.png)
+
+### 💬 Natural-language skill triggers
+![Claude Code interaction demo](docs/assets/demo-2-claude-code.png)
+
+### 📤 Real outputs ready to ship
+![Output demo](docs/assets/demo-3-output.png)
+
+---
+
 ## ✨ Highlights
 
 - 🧪 **Full lifecycle coverage** — Spec parsing, TC design, automation generation, code review, regression planning, bug filing, mutation testing, and dashboard publishing
