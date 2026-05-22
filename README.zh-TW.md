@@ -213,7 +213,7 @@ skills/<skill-name>/
 | 項目 | 需求 |
 |------|------|
 | **Claude Code** | 最新版（skills 是一級公民） |
-| **OS** | macOS / Linux（Windows: 使用 WSL）|
+| **OS** | macOS / Linux / **Windows 原生（v1.3.0+）** — 見 [docs/install-windows.md](docs/install-windows.md) |
 | **MCP servers（選用）** | atlassian, slack, google-workspace, mcp-google-full, mcp-context-mode |
 | **必要 CLI 工具** | `bash`, `jq`, `git` |
 | **選用 CLI 工具** | `gh`（GitHub Actions）, `aws`（S3 publish）, `python3` + `pytest`（BE skills）, `flutter`（Flutter skills）, `xcodebuild`（iOS）, Gradle（Android）|
@@ -225,7 +225,7 @@ skills/<skill-name>/
 - [x] ~~內建 schema 校驗~~ — 已於 v1.1.0 用 `scripts/validate-config.sh` 完成
 - [x] ~~更多 preset：新創 / 企業 / 政府~~ — 已於 v1.1.0 完成
 - [x] ~~CI/CD pipeline 整合範本（GitHub Actions / GitLab / CircleCI）~~ — 已於 v1.2.0 完成，見 [docs/ci-integration.md](docs/ci-integration.md)
-- [ ] Windows 原生支援（目前需用 WSL）
+- [x] ~~Windows 原生支援~~ — 已於 v1.3.0 用 `.ps1` 腳本完成，見 [docs/install-windows.md](docs/install-windows.md)
 - [ ] 多語言擴充：日本語 / 简体中文
 - [ ] Config 編輯 Web UI
 - [ ] Skill 遙測（匿名統計，優化預設值）

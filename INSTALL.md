@@ -2,10 +2,13 @@
 
 ## 系統需求
 
-- macOS / Linux（Windows 可用 WSL）
-- `bash` ≥ 4.0
-- `jq` ≥ 1.6（macOS 內建已足；Linux 用 `apt install jq`）
-- Claude Code CLI
+| OS | 工具 |
+|----|------|
+| **macOS / Linux** | `bash` ≥ 4.0 + `jq` ≥ 1.6（macOS 內建已足；Linux 用 `apt install jq`） |
+| **Windows**（v1.3.0+ 原生支援）| PowerShell 5.1+（Win 10 / Win 11 內建），或 Git Bash + jq，或 WSL |
+| 所有平台 | Claude Code CLI |
+
+> Windows 使用者請參閱 [docs/install-windows.md](docs/install-windows.md) — 三種安裝方式對照（PowerShell / Git Bash / WSL）。
 
 ## 三步驟安裝
 
@@ -38,7 +41,11 @@ cp config/config.example.json config/config.json
 ### 3. 跑安裝
 
 ```bash
+# macOS / Linux
 ./install.sh
+
+# Windows PowerShell（v1.3.0+）
+.\install.ps1
 ```
 
 腳本會：
@@ -50,9 +57,14 @@ cp config/config.example.json config/config.json
 ## 驗證
 
 ```bash
-# Dry-run（不動 ~/.claude）：
+# macOS / Linux Dry-run（不動 ~/.claude）：
 CLAUDE_SKILLS_DIR=/tmp/preview ./install.sh
 ls /tmp/preview/   # 應該有 15 個 skill 資料夾
+
+# Windows Dry-run：
+$env:CLAUDE_SKILLS_DIR = "C:\temp\qa-preview"
+.\install.ps1
+ls C:\temp\qa-preview\
 ```
 
 在 Claude Code 中：
@@ -102,8 +114,13 @@ cp config/presets/government.json     config/config.json   # 政府 / 高合規 
 ### 校驗 config（不安裝）
 
 ```bash
+# macOS / Linux
 ./scripts/validate-config.sh                              # 驗 config/config.json
 ./scripts/validate-config.sh config/presets/startup.json  # 驗指定檔案
+
+# Windows PowerShell
+.\scripts\validate-config.ps1
+.\scripts\validate-config.ps1 config\presets\startup.json
 ```
 
 校驗器會檢查：

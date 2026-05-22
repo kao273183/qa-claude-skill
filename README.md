@@ -213,7 +213,7 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 | What | Requirements |
 |------|--------------|
 | **Claude Code** | Latest (skills are first-class) |
-| **OS** | macOS / Linux (Windows: use WSL) |
+| **OS** | macOS / Linux / **Windows native (v1.3.0+)** — see [docs/install-windows.md](docs/install-windows.md) |
 | **MCP servers (optional)** | atlassian, slack, google-workspace, mcp-google-full, mcp-context-mode |
 | **Required CLI tools** | `bash`, `jq`, `git` |
 | **Optional CLI tools** | `gh` (GitHub Actions), `aws` (S3 publish), `python3` + `pytest` (BE skills), `flutter` (Flutter skills), `xcodebuild` (iOS), Gradle (Android) |
@@ -225,7 +225,7 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 - [x] ~~Built-in schema validation~~ — done in v1.1.0 via `scripts/validate-config.sh`
 - [x] ~~More presets: startup / enterprise / government~~ — done in v1.1.0
 - [x] ~~CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)~~ — done in v1.2.0, see [docs/ci-integration.md](docs/ci-integration.md)
-- [ ] Windows native support (currently requires WSL)
+- [x] ~~Windows native support~~ — done in v1.3.0 via `.ps1` scripts, see [docs/install-windows.md](docs/install-windows.md)
 - [ ] More language support: 日本語 / 简体中文
 - [ ] Web UI for config editing
 - [ ] Skill telemetry (anonymous usage stats to improve defaults)

@@ -1,5 +1,31 @@
 # Changelog
 
+## v1.3.0 — 2026-05-22
+
+### Added
+
+- 🪟 **Windows 原生支援** — 不再需要 WSL，PowerShell 5.1+ 直接跑
+  - `install.ps1` — PowerShell 版安裝腳本，內建 `ConvertFrom-Json` 取代 jq
+  - `uninstall.ps1` — 移除 + 還原 backup
+  - `scripts/validate-config.ps1` — 7 階段校驗（與 .sh 版功能對等）
+  - 對應 `$env:USERPROFILE\.claude\skills\`（取代 `$HOME/.claude/skills/`）
+  - 同樣支援 `$env:CLAUDE_SKILLS_DIR` 環境變數覆寫
+  - 同樣 30 個變數渲染（{{JIRA_PROJECT_KEY}} 等）
+
+- 📖 **Windows 安裝指南** ([`docs/install-windows.md`](docs/install-windows.md))
+  - 3 種安裝方式對照（PowerShell 原生 / Git Bash / WSL）
+  - 執行策略阻擋 (`ExecutionPolicy`) 處理
+  - Dry-run 預覽 + 移除 + 校驗 指令
+  - 5 個 Windows 專屬疑難排解
+  - Windows CI runner 範例（GitHub Actions + GitLab CI）
+
+### Changed
+
+- README 將 OS 相容性從「macOS / Linux (Windows: WSL)」更新為「macOS / Linux / Windows native」
+- INSTALL.md 拆 macOS/Linux 與 Windows 指令對照
+
+---
+
 ## v1.2.0 — 2026-05-21
 
 ### Added
