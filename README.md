@@ -229,7 +229,6 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 - [x] ~~More language support: 简体中文~~ — done in v1.4.0, see [README.zh-CN.md](README.zh-CN.md)
 - [ ] More language support: 日本語
 - [ ] Web UI for config editing
-- [ ] Skill telemetry (anonymous usage stats to improve defaults)
 
 ---
 
