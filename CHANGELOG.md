@@ -1,5 +1,53 @@
 # Changelog
 
+## v1.6.0 — 2026-05-22
+
+### Added — 4 個高 CP 值 skill（套件從 20 → 24 個）
+
+- 🦽 **`a11y-audit`** — 深度無障礙審查
+  - Lighthouse / axe-core / iOS Accessibility Inspector / Android Accessibility Scanner
+  - WCAG 2.1 AA / 2.2 AA / Section 508 可選
+  - 自動產出工具報告 + 人工 checklist（補工具 60% 盲區）
+  - 整合 `bug-report` 自動建 Critical ticket
+
+- 🌐 **`localization-test`** — i18n/l10n 6 維度檢查
+  - 翻譯完整性（resource file diff）
+  - 字串長度溢出（含各語言相對英文的長度表）
+  - RTL 渲染（icon 翻轉檢查）
+  - 日期/數字/貨幣格式
+  - 複數規則（pluralization）
+  - Locale 切換不重啟
+
+- 🔔 **`push-notification-test`** — APNs/FCM/Web Push 8 大場景
+  - Delivery（背景 / 前景 / killed / 弱網 / silent）
+  - Click（cold / warm / active / locked）
+  - Deep link routing
+  - Permission（grant / deny / 後續開啟）
+  - Action buttons (rich push)
+  - 字級放大 banner
+  - Localization
+  - 大批推播效能
+
+- 🏭 **`test-data-factory`** — 跨平台統一 fixture
+  - 一份 entity schema → 5 平台 factory（Swift / Kotlin / Dart / TS / Python）
+  - 跨平台 field 對齊 + variant 命名統一
+  - Deterministic seed（重現 bug 用）
+  - 跨平台 schema 驗證指令
+
+### Added — config
+
+- `a11y_audit` 區段（standard / threshold / tools）
+- `localization` 區段（locales / RTL / file pattern）
+- `push_notification` 區段（platforms / test devices / deep link scheme）
+- `test_data_factory` 區段（entities / seed / email domain / platforms）
+
+### Changed
+
+- README 3 語版本：20 → 24 skills, 7 → 8 categories
+- 新分類「Quality Specialties / 品質專項」
+
+---
+
 ## v1.5.0 — 2026-05-22
 
 ### Added — 5 個新 Skill（套件從 15 → 20 個）

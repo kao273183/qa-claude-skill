@@ -275,6 +275,37 @@
     "$comment_dast_target_url": "DAST 目標 URL — 必須是 staging/uat，絕不能是 production"
   },
 
+  "a11y_audit": {
+    "standard": "WCAG21AA",
+    "$comment_standard": "WCAG21AA | WCAG22AA | Section508",
+    "lighthouse_threshold": 90,
+    "tools": ["axe", "lighthouse"]
+  },
+
+  "localization": {
+    "supported_locales": ["en"],
+    "base_locale": "en",
+    "translation_files_pattern": "**/i18n/*.json",
+    "rtl_locales": ["ar", "he", "fa", "ur"]
+  },
+
+  "push_notification": {
+    "platforms": [],
+    "$comment_platforms": "可選: ios android web — 空陣列表示不啟用此 skill",
+    "test_devices": [],
+    "deep_link_scheme": "",
+    "payload_templates_dir": "tests/push/"
+  },
+
+  "test_data_factory": {
+    "entities": [],
+    "$comment_entities": "[ { name, fields: { fieldName: { type, min, max, ref } } } ]",
+    "default_seed": null,
+    "$comment_default_seed": "null = random，固定數字 = deterministic（重現 bug 用）",
+    "email_domain": "example.com",
+    "platforms": ["all"]
+  },
+
   "language": {
     "primary": "zh-TW",
     "secondary": "en",
