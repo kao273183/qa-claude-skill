@@ -274,12 +274,12 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 | Use Case | License |
 |----------|---------|
-| 🟢 Personal / education / research / non-profit / evaluation (< 30 days) | [MIT](LICENSE-MIT) (free) |
-| 🟢 Open-source contributions to this repo | [MIT](LICENSE-MIT) (free) |
-| 🔴 For-profit organization internal use | [Commercial](LICENSE-COMMERCIAL.md) (paid) |
-| 🔴 Bundling in paid product / SaaS / consulting | [Commercial](LICENSE-COMMERCIAL.md) (paid) |
+| 🟢 Personal / education / research / non-profit / evaluation (< 30 days) | [MIT](licenses/MIT.md) (free) |
+| 🟢 Open-source contributions to this repo | [MIT](licenses/MIT.md) (free) |
+| 🔴 For-profit organization internal use | [Commercial](licenses/COMMERCIAL.md) (paid) |
+| 🔴 Bundling in paid product / SaaS / consulting | [Commercial](licenses/COMMERCIAL.md) (paid) |
 
-For commercial licensing, open a [GitHub Issue with `commercial-license` label](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue).
+For commercial licensing, open a [GitHub Issue with `commercial-license` label](licenses/COMMERCIAL.md#step-1-open-a-github-issue).
 
 **Trademark**: "QA Claude Skill" is a trademark of Jack Kao — see [TRADEMARK.md](TRADEMARK.md) for usage rules. The MIT/Commercial license grants source-code rights, **not** trademark rights. You may not name a fork "QA Claude Skill X" without permission.
 

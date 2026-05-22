@@ -3,19 +3,19 @@ QA Claude Skill — Dual License
 
 This software is dual-licensed:
 
-1. **MIT License** (see LICENSE-MIT)
+1. **MIT License** (see licenses/MIT.md)
    - Use freely for: personal projects, education, research, evaluation,
      non-profit organizations, and open-source contributions.
    - Modification, redistribution, and private use are permitted.
    - No warranty is provided.
 
-2. **Commercial License** (see LICENSE-COMMERCIAL.md)
+2. **Commercial License** (see licenses/COMMERCIAL.md)
    - **Required** for any commercial use, including but not limited to:
      - Using this software in a paid product or service.
      - Using this software within a for-profit company's internal workflows.
      - Redistributing this software as part of a commercial offering.
      - Providing paid consulting based on this software.
-   - Contact the author to obtain a commercial license — see LICENSE-COMMERCIAL.md.
+   - Contact the author to obtain a commercial license — see licenses/COMMERCIAL.md.
 
 If you are unsure whether your use case requires the commercial license,
 please open a GitHub Issue with the label `commercial-license-question`

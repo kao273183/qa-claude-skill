@@ -292,12 +292,12 @@ skills/<skill-name>/
 
 | 使用情境 | 授权 |
 |---------|------|
-| 🟢 个人 / 教育 / 学术研究 / 非营利 / 评估（< 30 天）| [MIT](LICENSE-MIT)（免费）|
-| 🟢 对此 repo 的开源贡献 | [MIT](LICENSE-MIT)（免费）|
-| 🔴 营利组织内部使用 | [Commercial](LICENSE-COMMERCIAL.md)（付费）|
-| 🔴 内嵌于付费产品 / SaaS / 咨询服务 | [Commercial](LICENSE-COMMERCIAL.md)（付费）|
+| 🟢 个人 / 教育 / 学术研究 / 非营利 / 评估（< 30 天）| [MIT](licenses/MIT.md)（免费）|
+| 🟢 对此 repo 的开源贡献 | [MIT](licenses/MIT.md)（免费）|
+| 🔴 营利组织内部使用 | [Commercial](licenses/COMMERCIAL.md)（付费）|
+| 🔴 内嵌于付费产品 / SaaS / 咨询服务 | [Commercial](licenses/COMMERCIAL.md)（付费）|
 
-商业授权请开 [GitHub Issue 并贴 `commercial-license` 标签](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue)。
+商业授权请开 [GitHub Issue 并贴 `commercial-license` 标签](licenses/COMMERCIAL.md#step-1-open-a-github-issue)。
 
 **商标**：「QA Claude Skill」为 Jack Kao 之商标 —— 使用规范见 [TRADEMARK.md](TRADEMARK.md)。MIT / Commercial license 授予源代码权利，**不**授予商标权。未经授权不得将 fork 命名为「QA Claude Skill X」。
 

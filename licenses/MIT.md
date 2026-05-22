@@ -19,7 +19,7 @@ where the contributor is not paid for the contribution.
 
 **Commercial use** (use within for-profit organizations, paid products,
 paid services, or commercial offerings) requires a separate commercial
-license — see LICENSE-COMMERCIAL.md.
+license — see COMMERCIAL.md.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,

@@ -136,7 +136,7 @@ The roadmap is shaped by:
 1. **Direct user requests** — open a [GitHub Discussion](https://github.com/kao273183/qa-claude-skill/discussions/categories/ideas) with the `idea` category
 2. **Bug reports that reveal missing features** — file an issue
 3. **PRs** — if you build it, we're more likely to ship it
-4. **Commercial customers** — paid customers can request prioritization (see [LICENSE-COMMERCIAL.md](LICENSE-COMMERCIAL.md))
+4. **Commercial customers** — paid customers can request prioritization (see [licenses/COMMERCIAL.md](licenses/COMMERCIAL.md))
 5. **Conference talks / blog posts I write** — sometimes ideas emerge from explaining concepts
 
 If you want to **vote** on existing items, leave a 👍 reaction on the corresponding issue.

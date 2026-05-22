@@ -119,7 +119,7 @@ A Commercial License for this software is separate. The fact that you pay for ot
 
 ### Q: Open-source dual licensing — is this OSI-approved?
 
-The MIT portion is OSI-approved. The dual-license arrangement (MIT for non-commercial + commercial license for commercial) is a custom arrangement, not an OSI-approved scheme. Refer to actual MIT (LICENSE-MIT) and the commercial terms (this file) for full clarity.
+The MIT portion is OSI-approved. The dual-license arrangement (MIT for non-commercial + commercial license for commercial) is a custom arrangement, not an OSI-approved scheme. Refer to actual MIT (MIT.md) and the commercial terms (this file) for full clarity.
 
 ## Author contact
 

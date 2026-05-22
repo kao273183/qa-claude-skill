@@ -11,8 +11,8 @@
 ### Added
 
 - `LICENSE` — 雙 license 主檔（指向 MIT + Commercial）
-- `LICENSE-MIT` — 純 MIT 條款（含非商業使用範圍定義）
-- `LICENSE-COMMERCIAL.md` — 商業授權條款 + 申請流程 + 6 個 FAQ
+- `licenses/MIT.md` — 純 MIT 條款（含非商業使用範圍定義）
+- `licenses/COMMERCIAL.md` — 商業授權條款 + 申請流程 + 6 個 FAQ
   - 透過 GitHub Issue (`commercial-license` 標籤) 申請
   - 案件式議價（依組織規模 / 使用範圍 / 期限決定）
   - 5 個工作日內回覆

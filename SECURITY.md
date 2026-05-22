@@ -105,7 +105,7 @@ When you adopt this skill suite, please:
 3. **Run `scripts/validate-config.sh` before installing** — catches misconfigurations
 4. **Review pull requests carefully** — especially changes to `install.sh`, `install.ps1`, and skill markdown
 5. **Keep dependencies updated** — particularly Python (`pytest`, `mutmut`, `hypothesis`) and Node (Playwright, Cypress)
-6. **For commercial deployments** — see the [Commercial License](LICENSE-COMMERCIAL.md) FAQ for hardening guidance
+6. **For commercial deployments** — see the [Commercial License](licenses/COMMERCIAL.md) FAQ for hardening guidance
 
 ## Updates to this policy
 
