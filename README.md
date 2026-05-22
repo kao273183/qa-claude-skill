@@ -1,7 +1,7 @@
 <h1 align="center">QA Claude Skill</h1>
 
 <p align="center">
-  <em>20 production-grade QA workflow skills for Claude Code — from spec to release.</em>
+  <em>24 production-grade QA workflow skills for Claude Code — from spec to release.</em>
 </p>
 
 <p align="center">
@@ -10,13 +10,13 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/skills-20-2563EB" alt="20 skills" />
+  <img src="https://img.shields.io/badge/skills-24-2563EB" alt="24 skills" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code Compatible" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 modes" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="Multilingual" />
 </p>
 
-> A configurable suite of **20 QA skills** for [Claude Code](https://claude.ai/code), covering the
+> A configurable suite of **24 QA skills** for [Claude Code](https://claude.ai/code), covering the
 > full test lifecycle: **spec → TC → automation → performance → security → review → regression → publish**.
 > Extracted from a personal QA workspace and generalized via `config.json` —
 > drop in your team's IDs and it works in any team, any tool stack.
@@ -37,7 +37,7 @@
 
 ## 📦 What's in the box
 
-20 skills across 7 categories:
+24 skills across 7 categories:
 
 ### Test Design (8)
 
@@ -94,6 +94,15 @@
 | [`visual-regression-gen`](skills/visual-regression-gen/) | Playwright snapshot / Percy / Chromatic / BackstopJS — auto-mask dynamic elements |
 | [`flaky-test-hunter`](skills/flaky-test-hunter/) | Analyze CI history → identify flaky tests → suggest fixes + auto-quarantine |
 
+### Quality Specialties (4) — ✨ NEW in v1.6.0
+
+| Skill | Purpose |
+|-------|---------|
+| [`a11y-audit`](skills/a11y-audit/) | Deep accessibility audit (Lighthouse / axe / iOS Inspector / Android Scanner) — WCAG 2.1/2.2 AA scored report |
+| [`localization-test`](skills/localization-test/) | i18n/l10n verification — missing translations / string overflow / RTL / format / pluralization / locale switch |
+| [`push-notification-test`](skills/push-notification-test/) | APNs / FCM / Web Push — 8 test scenarios (delivery / click / deep link / permission / batch perf) |
+| [`test-data-factory`](skills/test-data-factory/) | Cross-platform unified fixtures (Swift / Kotlin / Dart / TypeScript / Python) — one schema → 5 factories aligned |
+
 > 💡 **First time hearing of mutation testing / property-based testing / spec-driven dev / test tiering?**
 > Each has a 5-minute Chinese intro at `skills/<name>/concept-zh.md`. See [Concept Guides](#-concept-guides).
 
@@ -128,7 +137,7 @@ cp config/config.example.json config/config.json
 
 ```bash
 CLAUDE_SKILLS_DIR=/tmp/preview ./install.sh
-ls /tmp/preview/   # 20 skill directories
+ls /tmp/preview/   # 24 skill directories
 grep -r '{{' /tmp/preview/ | grep -v '變數'   # should be empty
 ```
 

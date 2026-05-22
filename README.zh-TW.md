@@ -1,7 +1,7 @@
 <h1 align="center">QA Claude Skill</h1>
 
 <p align="center">
-  <em>給 Claude Code 用的 20 個生產級 QA 工作流 Skill — 從規格到上線一條龍。</em>
+  <em>給 Claude Code 用的 24 個生產級 QA 工作流 Skill — 從規格到上線一條龍。</em>
 </p>
 
 <p align="center">
@@ -10,13 +10,13 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/skills-15-2563EB" alt="20 個 skill" />
+  <img src="https://img.shields.io/badge/skills-24-2563EB" alt="24 個 skill" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 相容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 種模式" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多語" />
 </p>
 
-> 一個可配置的 **20 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
+> 一個可配置的 **24 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
 > 覆蓋完整測試生命週期：**規格 → TC → 自動化 → 效能 → 安全 → 審查 → 回歸 → 發布**。
 > 從個人 QA workspace 抽離並透過 `config.json` 通用化 —
 > 換上你團隊的 ID 就能套用到任何團隊、任何工具棧。
@@ -37,7 +37,7 @@
 
 ## 📦 套件包含
 
-20 個 Skill 分 7 類：
+24 個 Skill 分 8 類：
 
 ### 測試設計（8 個）
 
@@ -94,6 +94,15 @@
 | [`visual-regression-gen`](skills/visual-regression-gen/) | Playwright snapshot / Percy / Chromatic / BackstopJS — 自動 mask 動態元素 |
 | [`flaky-test-hunter`](skills/flaky-test-hunter/) | 分析 CI 歷史 → 找出 flaky test → 給修復建議 + 自動 quarantine |
 
+### 品質專項（4 個）— ✨ v1.6.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`a11y-audit`](skills/a11y-audit/) | 深度無障礙審查（Lighthouse / axe / iOS Inspector / Android Scanner）— WCAG 2.1/2.2 AA 評分報告 |
+| [`localization-test`](skills/localization-test/) | i18n/l10n 驗證 — 翻譯漏字 / 字串溢出 / RTL / 格式 / 複數 / locale 切換 |
+| [`push-notification-test`](skills/push-notification-test/) | APNs / FCM / Web Push — 8 大測試場景（送達 / 點擊 / Deep link / 權限 / 大批推播效能）|
+| [`test-data-factory`](skills/test-data-factory/) | 跨平台統一 fixture（Swift / Kotlin / Dart / TypeScript / Python）— 一份 schema → 5 平台 factory 對齊 |
+
 > 💡 **第一次聽到變異測試 / property-based testing / 規格驅動開發 / 測試分層？**
 > 每個概念有 5 分鐘中文入門：`skills/<name>/concept-zh.md`，見[概念入門](#-概念入門)。
 
@@ -128,7 +137,7 @@ cp config/config.example.json config/config.json
 
 ```bash
 CLAUDE_SKILLS_DIR=/tmp/preview ./install.sh
-ls /tmp/preview/   # 應該有 20 個 skill 資料夾
+ls /tmp/preview/   # 應該有 24 個 skill 資料夾
 grep -r '{{' /tmp/preview/ | grep -v '變數'   # 應該為空（變數全解析）
 ```
 

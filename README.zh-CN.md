@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/skills-15-2563EB" alt="15 个 skill" />
+  <img src="https://img.shields.io/badge/skills-24-2563EB" alt="15 个 skill" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 兼容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 种模式" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多语言" />
@@ -37,7 +37,7 @@
 
 ## 📦 套件包含
 
-20 个 Skill 分 7 类：
+24 个 Skill 分 8 类：
 
 ### 测试设计（8 个）
 
@@ -93,6 +93,15 @@
 |-------|------|
 | [`visual-regression-gen`](skills/visual-regression-gen/) | Playwright snapshot / Percy / Chromatic / BackstopJS — 自动 mask 动态元素 |
 | [`flaky-test-hunter`](skills/flaky-test-hunter/) | 分析 CI 历史 → 找出 flaky test → 给修复建议 + 自动 quarantine |
+
+### 质量专项（4 个）— ✨ v1.6.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`a11y-audit`](skills/a11y-audit/) | 深度无障碍审查（Lighthouse / axe / iOS Inspector / Android Scanner）— WCAG 2.1/2.2 AA 评分报告 |
+| [`localization-test`](skills/localization-test/) | i18n/l10n 验证 — 翻译漏字 / 字符串溢出 / RTL / 格式 / 复数 / locale 切换 |
+| [`push-notification-test`](skills/push-notification-test/) | APNs / FCM / Web Push — 8 大测试场景（送达 / 点击 / Deep link / 权限 / 大批推送性能）|
+| [`test-data-factory`](skills/test-data-factory/) | 跨平台统一 fixture（Swift / Kotlin / Dart / TypeScript / Python）— 一份 schema → 5 平台 factory 对齐 |
 
 > 💡 **第一次听到变异测试 / property-based testing / 规格驱动开发 / 测试分层？**
 > 每个概念有 5 分钟中文导读：`skills/<name>/concept-zh.md`，见[概念入门](#-概念入门)。
