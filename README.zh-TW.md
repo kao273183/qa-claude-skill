@@ -14,6 +14,7 @@
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 相容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 種模式" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多語" />
+  <a href="https://www.buymeacoffee.com/minikao"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" /></a>
 </p>
 
 > 一個可配置的 **24 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
@@ -278,6 +279,20 @@ skills/<skill-name>/
 **商標**：「QA Claude Skill」為 Jack Kao 之商標 — 使用規範見 [TRADEMARK.md](TRADEMARK.md)。MIT / Commercial license 授予原始碼權利，**不**授予商標權。未經授權不得將 fork 命名為「QA Claude Skill X」。
 
 > 本套件為 [Claude Code](https://claude.ai/code) 使用者的**社群 / 個人專案**，**非** Anthropic 官方產品。
+
+---
+
+## ☕ 贊助
+
+如果這個專案幫你的 QA 團隊省下時間，考慮請我喝杯咖啡 — 讓專案持續迭代：
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/minikao">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  </a>
+</p>
+
+或者給 repo 一個 ⭐ — 不花錢但能幫助其他人發現本專案。
 
 ---
 

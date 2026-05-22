@@ -10,13 +10,14 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/skills-24-2563EB" alt="15 个 skill" />
+  <img src="https://img.shields.io/badge/skills-24-2563EB" alt="24 个 skill" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 兼容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 种模式" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多语言" />
+  <a href="https://www.buymeacoffee.com/minikao"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" /></a>
 </p>
 
-> 一个可配置的 **15 个 QA Skill** 套件，给 [Claude Code](https://claude.ai/code) 使用，
+> 一个可配置的 **24 个 QA Skill** 套件，给 [Claude Code](https://claude.ai/code) 使用，
 > 覆盖完整测试生命周期：**规格 → TC → 自动化 → 审查 → 回归 → 发布**。
 > 从个人 QA workspace 抽离并通过 `config.json` 通用化 —— 换上你团队的 ID
 > 就能套用到任何团队、任何工具栈。
@@ -296,6 +297,20 @@ skills/<skill-name>/
 **商标**：「QA Claude Skill」为 Jack Kao 之商标 —— 使用规范见 [TRADEMARK.md](TRADEMARK.md)。MIT / Commercial license 授予源代码权利，**不**授予商标权。未经授权不得将 fork 命名为「QA Claude Skill X」。
 
 > 本套件为 [Claude Code](https://claude.ai/code) 使用者的**社群 / 个人专案**，**非** Anthropic 官方产品。
+
+---
+
+## ☕ 赞助
+
+如果这个专案帮你的 QA 团队省下时间，考虑请我喝杯咖啡 —— 让专案持续迭代：
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/minikao">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  </a>
+</p>
+
+或者给 repo 一个 ⭐ —— 不花钱但能帮助其他人发现本专案。
 
 ---
 

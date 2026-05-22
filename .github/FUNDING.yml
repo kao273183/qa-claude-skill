@@ -1,0 +1,18 @@
+# GitHub Sponsor button configuration
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+# Replace 'minikao' with your actual Buy Me a Coffee username if different
+custom: ["https://www.buymeacoffee.com/minikao"]
+
+# 其他可選平台（取消註解啟用）:
+# github: kao273183
+# patreon: your-username
+# open_collective: your-collective
+# ko_fi: your-username
+# tidelift: npm/package-name
+# community_bridge: your-project-name
+# liberapay: your-username
+# issuehunt: your-username
+# otechie: your-username
+# lfx_crowdfunding: your-project
+# polar: your-username

@@ -14,6 +14,7 @@
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code Compatible" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 modes" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="Multilingual" />
+  <a href="https://www.buymeacoffee.com/minikao"><img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black" alt="Buy Me a Coffee" /></a>
 </p>
 
 > A configurable suite of **24 QA skills** for [Claude Code](https://claude.ai/code), covering the
@@ -278,6 +279,20 @@ For commercial licensing, open a [GitHub Issue with `commercial-license` label](
 **Trademark**: "QA Claude Skill" is a trademark of Jack Kao — see [TRADEMARK.md](TRADEMARK.md) for usage rules. The MIT/Commercial license grants source-code rights, **not** trademark rights. You may not name a fork "QA Claude Skill X" without permission.
 
 > This is a **community / personal project** for [Claude Code](https://claude.ai/code) users — NOT an official Anthropic product.
+
+---
+
+## ☕ Support
+
+If this project saves your QA team time, consider buying me a coffee — it keeps the project iterating:
+
+<p align="center">
+  <a href="https://www.buymeacoffee.com/minikao">
+    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  </a>
+</p>
+
+Or just give the repo a ⭐ — it costs nothing and helps others find it.
 
 ---
 
