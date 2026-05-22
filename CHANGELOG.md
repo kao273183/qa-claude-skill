@@ -1,5 +1,28 @@
 # Changelog
 
+## v1.6.1 — 2026-05-22
+
+### Changed
+
+- 📜 **License 改為雙重授權（Dual License）**
+  - 個人 / 教育 / 學術研究 / 非營利 / 評估 (< 30 天)：免費 MIT
+  - 商業使用（營利組織內部 / 付費產品 / SaaS / 顧問）：需取得 Commercial License
+
+### Added
+
+- `LICENSE` — 雙 license 主檔（指向 MIT + Commercial）
+- `LICENSE-MIT` — 純 MIT 條款（含非商業使用範圍定義）
+- `LICENSE-COMMERCIAL.md` — 商業授權條款 + 申請流程 + 6 個 FAQ
+  - 透過 GitHub Issue (`commercial-license` 標籤) 申請
+  - 案件式議價（依組織規模 / 使用範圍 / 期限決定）
+  - 5 個工作日內回覆
+
+### Removed
+
+- README 的「Credits / 致謝」段（這是 Jack Kao 個人作品，不需 AI 協作謝詞）
+
+---
+
 ## v1.6.0 — 2026-05-22
 
 ### Added — 4 個高 CP 值 skill（套件從 20 → 24 個）
