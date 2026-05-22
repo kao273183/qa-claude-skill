@@ -1,21 +1,24 @@
-MIT License
+QA Claude Skill — Dual License
+==============================
+
+This software is dual-licensed:
+
+1. **MIT License** (see LICENSE-MIT)
+   - Use freely for: personal projects, education, research, evaluation,
+     non-profit organizations, and open-source contributions.
+   - Modification, redistribution, and private use are permitted.
+   - No warranty is provided.
+
+2. **Commercial License** (see LICENSE-COMMERCIAL.md)
+   - **Required** for any commercial use, including but not limited to:
+     - Using this software in a paid product or service.
+     - Using this software within a for-profit company's internal workflows.
+     - Redistributing this software as part of a commercial offering.
+     - Providing paid consulting based on this software.
+   - Contact the author to obtain a commercial license — see LICENSE-COMMERCIAL.md.
+
+If you are unsure whether your use case requires the commercial license,
+please open a GitHub Issue with the label `commercial-license-question`
+before proceeding.
 
 Copyright (c) 2026 Jack Kao
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

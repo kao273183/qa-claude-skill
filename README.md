@@ -268,7 +268,16 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## 📝 License
 
-[MIT](LICENSE) — use, modify, redistribute freely. Attribution appreciated.
+**Dual-licensed** — see [LICENSE](LICENSE) for full details:
+
+| Use Case | License |
+|----------|---------|
+| 🟢 Personal / education / research / non-profit / evaluation (< 30 days) | [MIT](LICENSE-MIT) (free) |
+| 🟢 Open-source contributions to this repo | [MIT](LICENSE-MIT) (free) |
+| 🔴 For-profit organization internal use | [Commercial](LICENSE-COMMERCIAL.md) (paid) |
+| 🔴 Bundling in paid product / SaaS / consulting | [Commercial](LICENSE-COMMERCIAL.md) (paid) |
+
+For commercial licensing, open a [GitHub Issue with `commercial-license` label](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue).
 
 ---
 

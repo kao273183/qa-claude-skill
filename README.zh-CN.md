@@ -282,7 +282,16 @@ skills/<skill-name>/
 
 ## 📝 授权
 
-[MIT](LICENSE) —— 自由使用、修改、分发。欢迎 attribution。
+**双重授权** —— 完整条款见 [LICENSE](LICENSE)：
+
+| 使用情境 | 授权 |
+|---------|------|
+| 🟢 个人 / 教育 / 学术研究 / 非营利 / 评估（< 30 天）| [MIT](LICENSE-MIT)（免费）|
+| 🟢 对此 repo 的开源贡献 | [MIT](LICENSE-MIT)（免费）|
+| 🔴 营利组织内部使用 | [Commercial](LICENSE-COMMERCIAL.md)（付费）|
+| 🔴 内嵌于付费产品 / SaaS / 咨询服务 | [Commercial](LICENSE-COMMERCIAL.md)（付费）|
+
+商业授权请开 [GitHub Issue 并贴 `commercial-license` 标签](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue)。
 
 ---
 
