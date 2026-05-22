@@ -37,7 +37,7 @@
 
 ## 📦 套件包含
 
-15 个 Skill 分 5 类：
+20 个 Skill 分 7 类：
 
 ### 测试设计（8 个）
 
@@ -78,6 +78,21 @@
 | Skill | 用途 |
 |-------|------|
 | [`publish-regression`](skills/publish-regression/) | 手动回归测试报告发布到 S3 + CloudFront 失效 + Slack 通知 |
+
+### 性能与安全（3 个）— ✨ v1.5.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`performance-test-gen`](skills/performance-test-gen/) | k6 / JMeter / Locust 压测脚本 + SLA 阈值 + ramp-up 曲线 + CI 集成 |
+| [`security-scan`](skills/security-scan/) | SAST (Semgrep) + DAST (OWASP ZAP) + SCA (Snyk/Trivy) + Secret scan (gitleaks) — 统一 CVSS 报告 |
+| [`api-contract-test`](skills/api-contract-test/) | Pact / Schemathesis / Spring Cloud Contract — PR 时就抓到微服务 breaking change |
+
+### CI 健康度（2 个）— ✨ v1.5.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`visual-regression-gen`](skills/visual-regression-gen/) | Playwright snapshot / Percy / Chromatic / BackstopJS — 自动 mask 动态元素 |
+| [`flaky-test-hunter`](skills/flaky-test-hunter/) | 分析 CI 历史 → 找出 flaky test → 给修复建议 + 自动 quarantine |
 
 > 💡 **第一次听到变异测试 / property-based testing / 规格驱动开发 / 测试分层？**
 > 每个概念有 5 分钟中文导读：`skills/<name>/concept-zh.md`，见[概念入门](#-概念入门)。

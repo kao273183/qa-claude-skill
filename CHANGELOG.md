@@ -1,5 +1,31 @@
 # Changelog
 
+## v1.5.0 — 2026-05-22
+
+### Added — 5 個新 Skill（套件從 15 → 20 個）
+
+#### 效能與安全（3 個）
+
+- 🚀 **`performance-test-gen`** — 從 TC 生成 k6 / JMeter / Locust 壓測腳本
+- 🔒 **`security-scan`** — 整合 SAST + DAST + SCA + Secret scan，統一 CVSS 報告
+- 🤝 **`api-contract-test`** — Pact / Schemathesis / Spring Cloud Contract 契約測試
+
+#### CI 健康度（2 個）
+
+- 📸 **`visual-regression-gen`** — Playwright snapshot / Percy / Chromatic / BackstopJS
+- 🎯 **`flaky-test-hunter`** — CI 失敗紀錄分析 + 自動 quarantine
+
+### Added — config
+
+- `performance` / `visual_regression` / `flaky_hunter` / `contract_test` / `security_scan` 5 個新區段
+
+### Changed
+
+- README 3 語版本：15 → 20 skills, 5 → 7 categories
+- 測試生命週期描述：加入「performance / security」階段
+
+---
+
 ## v1.4.0 — 2026-05-22
 
 ### Added

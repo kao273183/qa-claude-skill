@@ -130,7 +130,11 @@ render_skill() {
       ["{{PUBLISH_INDEX_GENERATOR}}",     (.publish_regression.index_generator_script // "")],
       ["{{WEB_REPO}}",                    (.platforms.web.repo // "")],
       ["{{WEB_PRIMARY_FRAMEWORK}}",       (.platforms.web.frameworks.primary // "playwright")],
-      ["{{WEB_DEFAULT_BROWSERS}}",        (.platforms.web.default_browsers // [] | join(", "))]
+      ["{{WEB_DEFAULT_BROWSERS}}",        (.platforms.web.default_browsers // [] | join(", "))],
+      ["{{PERF_PRIMARY_FRAMEWORK}}",      (.performance.primary_framework // "k6")],
+      ["{{VR_TOOL}}",                     (.visual_regression.tool // "playwright")],
+      ["{{CONTRACT_PRIMARY_TOOL}}",       (.contract_test.primary_tool // "pact")],
+      ["{{FLAKY_DAYS}}",                  ((.flaky_hunter.lookback_days // 30) | tostring)]
     ]
     | map(@tsv) | join("\n")
   ' "$CONFIG_FILE")

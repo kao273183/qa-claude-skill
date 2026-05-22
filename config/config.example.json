@@ -222,6 +222,59 @@
     }
   },
 
+  "performance": {
+    "enabled": false,
+    "primary_framework": "k6",
+    "$comment_primary_framework": "k6 | locust | jmeter",
+    "default_sla": {
+      "p95_ms": 1000,
+      "p99_ms": 3000,
+      "error_rate_max": 0.01,
+      "success_rate_min": 0.99
+    },
+    "base_url_uat": "",
+    "base_url_staging": ""
+  },
+
+  "visual_regression": {
+    "enabled": false,
+    "tool": "playwright",
+    "$comment_tool": "playwright | percy | chromatic | backstop",
+    "max_diff_ratio": 0.02,
+    "$comment_max_diff_ratio": "0.02 = 2% pixel tolerance",
+    "mask_dynamic_elements": true,
+    "auto_freeze_animations": true
+  },
+
+  "flaky_hunter": {
+    "ci_platform": "",
+    "$comment_ci_platform": "github-actions | gitlab-ci | circleci | jenkins | auto (default)",
+    "lookback_days": 30,
+    "flaky_threshold": 0.01,
+    "$comment_flaky_threshold": "1% — 以上算 flaky",
+    "high_flaky_threshold": 0.30,
+    "auto_quarantine": false,
+    "$comment_auto_quarantine": "建議 false，需手動同意才標 quarantine"
+  },
+
+  "contract_test": {
+    "enabled": false,
+    "primary_tool": "pact",
+    "$comment_primary_tool": "pact | schemathesis | spring-cloud",
+    "pact_broker_url": "",
+    "relationships": []
+  },
+
+  "security_scan": {
+    "enabled": false,
+    "tools": ["semgrep", "snyk", "gitleaks"],
+    "$comment_tools": "可選: semgrep snyk gitleaks bandit trivy zap",
+    "severity_threshold": "high",
+    "$comment_severity_threshold": "critical | high | medium | low — CI fail 門檻",
+    "dast_target_url": "",
+    "$comment_dast_target_url": "DAST 目標 URL — 必須是 staging/uat，絕不能是 production"
+  },
+
   "language": {
     "primary": "zh-TW",
     "secondary": "en",

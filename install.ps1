@@ -125,6 +125,10 @@ $Substitutions = [ordered]@{
     '{{WEB_REPO}}'                    = Get-Value $config 'platforms.web.repo'
     '{{WEB_PRIMARY_FRAMEWORK}}'       = Get-Value $config 'platforms.web.frameworks.primary' 'playwright'
     '{{WEB_DEFAULT_BROWSERS}}'        = $browsersArr
+    '{{PERF_PRIMARY_FRAMEWORK}}'      = Get-Value $config 'performance.primary_framework' 'k6'
+    '{{VR_TOOL}}'                     = Get-Value $config 'visual_regression.tool' 'playwright'
+    '{{CONTRACT_PRIMARY_TOOL}}'       = Get-Value $config 'contract_test.primary_tool' 'pact'
+    '{{FLAKY_DAYS}}'                  = if ($config.flaky_hunter.lookback_days) { [string]$config.flaky_hunter.lookback_days } else { '30' }
 }
 
 # ---- Render a single skill ----

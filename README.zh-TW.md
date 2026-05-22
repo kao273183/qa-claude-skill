@@ -1,7 +1,7 @@
 <h1 align="center">QA Claude Skill</h1>
 
 <p align="center">
-  <em>給 Claude Code 用的 15 個生產級 QA 工作流 Skill — 從規格到上線一條龍。</em>
+  <em>給 Claude Code 用的 20 個生產級 QA 工作流 Skill — 從規格到上線一條龍。</em>
 </p>
 
 <p align="center">
@@ -10,14 +10,14 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
-  <img src="https://img.shields.io/badge/skills-15-2563EB" alt="15 個 skill" />
+  <img src="https://img.shields.io/badge/skills-15-2563EB" alt="20 個 skill" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 相容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 種模式" />
   <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多語" />
 </p>
 
-> 一個可配置的 **15 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
-> 覆蓋完整測試生命週期：**規格 → TC → 自動化 → 審查 → 回歸 → 發布**。
+> 一個可配置的 **20 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
+> 覆蓋完整測試生命週期：**規格 → TC → 自動化 → 效能 → 安全 → 審查 → 回歸 → 發布**。
 > 從個人 QA workspace 抽離並透過 `config.json` 通用化 —
 > 換上你團隊的 ID 就能套用到任何團隊、任何工具棧。
 
@@ -37,7 +37,7 @@
 
 ## 📦 套件包含
 
-15 個 Skill 分 5 類：
+20 個 Skill 分 7 類：
 
 ### 測試設計（8 個）
 
@@ -79,6 +79,21 @@
 |-------|------|
 | [`publish-regression`](skills/publish-regression/) | 手動回歸測試報告發布到 S3 + CloudFront 失效 + Slack 通知 |
 
+### 效能與安全（3 個）— ✨ v1.5.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`performance-test-gen`](skills/performance-test-gen/) | k6 / JMeter / Locust 壓測腳本 + SLA 門檻 + ramp-up 曲線 + CI 整合 |
+| [`security-scan`](skills/security-scan/) | SAST (Semgrep) + DAST (OWASP ZAP) + SCA (Snyk/Trivy) + Secret scan (gitleaks) — 統一 CVSS 報告 |
+| [`api-contract-test`](skills/api-contract-test/) | Pact / Schemathesis / Spring Cloud Contract — PR 時就抓到微服務 breaking change |
+
+### CI 健康度（2 個）— ✨ v1.5.0 新增
+
+| Skill | 用途 |
+|-------|------|
+| [`visual-regression-gen`](skills/visual-regression-gen/) | Playwright snapshot / Percy / Chromatic / BackstopJS — 自動 mask 動態元素 |
+| [`flaky-test-hunter`](skills/flaky-test-hunter/) | 分析 CI 歷史 → 找出 flaky test → 給修復建議 + 自動 quarantine |
+
 > 💡 **第一次聽到變異測試 / property-based testing / 規格驅動開發 / 測試分層？**
 > 每個概念有 5 分鐘中文入門：`skills/<name>/concept-zh.md`，見[概念入門](#-概念入門)。
 
@@ -113,7 +128,7 @@ cp config/config.example.json config/config.json
 
 ```bash
 CLAUDE_SKILLS_DIR=/tmp/preview ./install.sh
-ls /tmp/preview/   # 應該有 15 個 skill 資料夾
+ls /tmp/preview/   # 應該有 20 個 skill 資料夾
 grep -r '{{' /tmp/preview/ | grep -v '變數'   # 應該為空（變數全解析）
 ```
 
