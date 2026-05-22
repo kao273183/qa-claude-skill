@@ -132,10 +132,6 @@ cp config/presets/government.json     config/config.json   # 政府 / 高合規 
 - 跨欄位依賴（mutation 需要 pytest / publish s3_cloudfront 需要 bucket）
 - 選填但建議的欄位
 
-### 我已經用過個人版（含 UOP 等硬編碼），怎麼遷移？
-
-見 [`docs/migration-from-personal.md`](./docs/migration-from-personal.md)。
-
 ## 疑難排解
 
 | 症狀 | 處理 |

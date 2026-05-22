@@ -280,9 +280,9 @@ skills/<skill-name>/
 
 ---
 
-## 📝 授权
+## 📝 授权与商标
 
-**双重授权** —— 完整条款见 [LICENSE](LICENSE)：
+**双重授权软件** —— 完整条款见 [LICENSE](LICENSE)：
 
 | 使用情境 | 授权 |
 |---------|------|
@@ -292,6 +292,10 @@ skills/<skill-name>/
 | 🔴 内嵌于付费产品 / SaaS / 咨询服务 | [Commercial](LICENSE-COMMERCIAL.md)（付费）|
 
 商业授权请开 [GitHub Issue 并贴 `commercial-license` 标签](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue)。
+
+**商标**：「QA Claude Skill」为 Jack Kao 之商标 —— 使用规范见 [TRADEMARK.md](TRADEMARK.md)。MIT / Commercial license 授予源代码权利，**不**授予商标权。未经授权不得将 fork 命名为「QA Claude Skill X」。
+
+> 本套件为 [Claude Code](https://claude.ai/code) 使用者的**社群 / 个人专案**，**非** Anthropic 官方产品。
 
 ---
 

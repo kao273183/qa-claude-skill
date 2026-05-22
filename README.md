@@ -176,10 +176,6 @@ Three layers of configurability:
 - 🏢 [Large team — ACME Corp](examples/jira-acme-corp/config.json) — Full JIRA + Slack + Google + AWS dashboard
 - 👤 [Solo developer](examples/solo-developer/config.json) — Pure Markdown, no external deps
 
-### Migrating from a personal version with hardcoded IDs?
-
-See [docs/migration-from-personal.md](docs/migration-from-personal.md) for the full mapping table.
-
 ---
 
 ## 🧩 Architecture
@@ -266,9 +262,9 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ---
 
-## 📝 License
+## 📝 License & Trademark
 
-**Dual-licensed** — see [LICENSE](LICENSE) for full details:
+**Dual-licensed software** — see [LICENSE](LICENSE) for full details:
 
 | Use Case | License |
 |----------|---------|
@@ -278,6 +274,10 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 | 🔴 Bundling in paid product / SaaS / consulting | [Commercial](LICENSE-COMMERCIAL.md) (paid) |
 
 For commercial licensing, open a [GitHub Issue with `commercial-license` label](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue).
+
+**Trademark**: "QA Claude Skill" is a trademark of Jack Kao — see [TRADEMARK.md](TRADEMARK.md) for usage rules. The MIT/Commercial license grants source-code rights, **not** trademark rights. You may not name a fork "QA Claude Skill X" without permission.
+
+> This is a **community / personal project** for [Claude Code](https://claude.ai/code) users — NOT an official Anthropic product.
 
 ---
 

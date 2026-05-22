@@ -176,10 +176,6 @@ cp config/presets/markdown-only.json  config/config.json   # 純文件
 - 🏢 [大型團隊 — ACME Corp](examples/jira-acme-corp/config.json) — JIRA + Slack + Google + AWS dashboard 全套
 - 👤 [單人開發者](examples/solo-developer/config.json) — 純 Markdown，無外部依賴
 
-### 從個人版（含 UOP / 公司專屬 ID）遷移？
-
-完整對照表見 [docs/migration-from-personal.md](docs/migration-from-personal.md)。
-
 ---
 
 ## 🧩 架構設計
@@ -266,9 +262,9 @@ skills/<skill-name>/
 
 ---
 
-## 📝 授權
+## 📝 授權與商標
 
-**雙重授權** — 完整條款見 [LICENSE](LICENSE)：
+**雙重授權軟體** — 完整條款見 [LICENSE](LICENSE)：
 
 | 使用情境 | 授權 |
 |---------|------|
@@ -278,6 +274,10 @@ skills/<skill-name>/
 | 🔴 內嵌於付費產品 / SaaS / 顧問服務 | [Commercial](LICENSE-COMMERCIAL.md)（付費）|
 
 商業授權請開 [GitHub Issue 並貼 `commercial-license` 標籤](LICENSE-COMMERCIAL.md#step-1-open-a-github-issue)。
+
+**商標**：「QA Claude Skill」為 Jack Kao 之商標 — 使用規範見 [TRADEMARK.md](TRADEMARK.md)。MIT / Commercial license 授予原始碼權利，**不**授予商標權。未經授權不得將 fork 命名為「QA Claude Skill X」。
+
+> 本套件為 [Claude Code](https://claude.ai/code) 使用者的**社群 / 個人專案**，**非** Anthropic 官方產品。
 
 ---
 
