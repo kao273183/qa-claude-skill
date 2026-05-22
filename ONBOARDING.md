@@ -154,6 +154,4 @@ $env:CLAUDE_SKILLS_DIR = "C:\temp\preview"; .\install.ps1
 
 ---
 
-<p align="center">
-  Made with ❤️ for QA teams who want to focus on quality, not paperwork.
-</p>
+> ❤️ Made for QA teams who want to focus on quality, not paperwork.
