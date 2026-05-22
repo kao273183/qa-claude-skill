@@ -270,11 +270,6 @@ PRs welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 [MIT](LICENSE) — use, modify, redistribute freely. Attribution appreciated.
 
-## 🙏 Credits
-
-Extracted from Jack Kao's personal Claude Code QA workspace iterated since 2025.
-Thanks to the engineers, QA peers, and AI collaborators (Claude / Codex / Gemini) who shaped the original version.
-
 ---
 
 <p align="center">

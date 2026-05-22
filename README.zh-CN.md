@@ -284,11 +284,6 @@ skills/<skill-name>/
 
 [MIT](LICENSE) —— 自由使用、修改、分发。欢迎 attribution。
 
-## 🙏 致谢
-
-本套件抽离自 Jack Kao 自 2025 起持续迭代的个人 Claude Code QA workspace。
-感谢原版迭代过程中协作的工程师、测试伙伴与 AI 伙伴（Claude / Codex / Gemini）。
-
 ---
 
 <p align="center">
