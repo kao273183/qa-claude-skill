@@ -243,13 +243,18 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 
 ## 🗺 Roadmap
 
-- [x] ~~Built-in schema validation~~ — done in v1.1.0 via `scripts/validate-config.sh`
-- [x] ~~More presets: startup / enterprise / government~~ — done in v1.1.0
-- [x] ~~CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)~~ — done in v1.2.0, see [docs/ci-integration.md](docs/ci-integration.md)
-- [x] ~~Windows native support~~ — done in v1.3.0 via `.ps1` scripts, see [docs/install-windows.md](docs/install-windows.md)
-- [x] ~~More language support: 简体中文~~ — done in v1.4.0, see [README.zh-CN.md](README.zh-CN.md)
-- [ ] More language support: 日本語
-- [ ] Web UI for config editing
+See [ROADMAP.md](ROADMAP.md) for the full picture — what's shipped, what's planned, and what we're explicitly not doing.
+
+**Highlights of what's next**:
+- 9 more skills (test-impact-analyzer, oauth-flow-test, payment-test, graphql-test, llm-quality-eval, ...)
+- Japanese translation
+- Video walkthrough + demo GIF
+
+Want to influence priority? Open a [GitHub Discussion](https://github.com/kao273183/qa-claude-skill/discussions/categories/ideas).
+
+## 🔒 Security
+
+Found a vulnerability? See [SECURITY.md](SECURITY.md) — preferred channel is GitHub Security Advisory.
 
 ---
 

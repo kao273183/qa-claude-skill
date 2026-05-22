@@ -265,13 +265,18 @@ skills/<skill-name>/
 
 ## 🗺 Roadmap
 
-- [x] ~~内置 schema 校验~~ —— 已于 v1.1.0 用 `scripts/validate-config.sh` 完成
-- [x] ~~更多 preset：创业 / 企业 / 政府~~ —— 已于 v1.1.0 完成
-- [x] ~~CI/CD pipeline 集成范本（GitHub Actions / GitLab / CircleCI）~~ —— 已于 v1.2.0 完成
-- [x] ~~Windows 原生支持~~ —— 已于 v1.3.0 用 `.ps1` 脚本完成
-- [x] ~~多语言扩充：简体中文~~ —— 已于 v1.4.0 完成
-- [ ] 多语言扩充：日本語
-- [ ] Config 编辑 Web UI
+完整版见 [ROADMAP.md](ROADMAP.md) —— 已完成 / 计划中 / 明确不做的项目。
+
+**接下来的重点**：
+- 9 个新 skill（test-impact-analyzer / oauth-flow-test / payment-test / graphql-test / llm-quality-eval ...）
+- 日语翻译
+- Video walkthrough + demo GIF
+
+想影响优先级？开 [GitHub Discussion](https://github.com/kao273183/qa-claude-skill/discussions/categories/ideas)。
+
+## 🔒 安全性
+
+发现漏洞？见 [SECURITY.md](SECURITY.md) —— 优先用 GitHub Security Advisory 私下回报。
 
 ---
 
