@@ -229,7 +229,6 @@ skills/<skill-name>/
 - [x] ~~多語言擴充：简体中文~~ — 已於 v1.4.0 完成，見 [README.zh-CN.md](README.zh-CN.md)
 - [ ] 多語言擴充：日本語
 - [ ] Config 編輯 Web UI
-- [ ] Skill 遙測（匿名統計，優化預設值）
 
 ---
 
