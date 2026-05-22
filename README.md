@@ -287,8 +287,8 @@ For commercial licensing, open a [GitHub Issue with `commercial-license` label](
 If this project saves your QA team time, consider buying me a coffee — it keeps the project iterating:
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/minikao">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  <a href="https://buymeacoffee.com/minikao">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="200" />
   </a>
 </p>
 
