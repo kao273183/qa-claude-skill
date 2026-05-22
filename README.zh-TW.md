@@ -287,8 +287,8 @@ skills/<skill-name>/
 如果這個專案幫你的 QA 團隊省下時間，考慮請我喝杯咖啡 — 讓專案持續迭代：
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/minikao">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  <a href="https://buymeacoffee.com/minikao">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="200" />
   </a>
 </p>
 

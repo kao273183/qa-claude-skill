@@ -305,8 +305,8 @@ skills/<skill-name>/
 如果这个专案帮你的 QA 团队省下时间，考虑请我喝杯咖啡 —— 让专案持续迭代：
 
 <p align="center">
-  <a href="https://www.buymeacoffee.com/minikao">
-    <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=minikao&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy Me a Coffee" />
+  <a href="https://buymeacoffee.com/minikao">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="200" />
   </a>
 </p>
 
