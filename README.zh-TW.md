@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="README.md">English</a> · <strong>繁體中文</strong>
+  <a href="README.md">English</a> · <strong>繁體中文</strong> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/skills-15-2563EB" alt="15 個 skill" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code 相容" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 種模式" />
-  <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW-FB923C" alt="雙語" />
+  <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="多語" />
 </p>
 
 > 一個可配置的 **15 個 QA Skill** 套件，給 [Claude Code](https://claude.ai/code) 使用，
@@ -226,7 +226,8 @@ skills/<skill-name>/
 - [x] ~~更多 preset：新創 / 企業 / 政府~~ — 已於 v1.1.0 完成
 - [x] ~~CI/CD pipeline 整合範本（GitHub Actions / GitLab / CircleCI）~~ — 已於 v1.2.0 完成，見 [docs/ci-integration.md](docs/ci-integration.md)
 - [x] ~~Windows 原生支援~~ — 已於 v1.3.0 用 `.ps1` 腳本完成，見 [docs/install-windows.md](docs/install-windows.md)
-- [ ] 多語言擴充：日本語 / 简体中文
+- [x] ~~多語言擴充：简体中文~~ — 已於 v1.4.0 完成，見 [README.zh-CN.md](README.zh-CN.md)
+- [ ] 多語言擴充：日本語
 - [ ] Config 編輯 Web UI
 - [ ] Skill 遙測（匿名統計，優化預設值）
 

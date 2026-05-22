@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>English</strong> · <a href="README.zh-TW.md">繁體中文</a>
+  <strong>English</strong> · <a href="README.zh-TW.md">繁體中文</a> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 
 <p align="center">
@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/skills-15-2563EB" alt="15 skills" />
   <img src="https://img.shields.io/badge/Claude%20Code-Compatible-7C3AED?logo=anthropic&logoColor=white" alt="Claude Code Compatible" />
   <img src="https://img.shields.io/badge/Mode-full--mcp%20%7C%20partial--mcp%20%7C%20markdown--only-10B981" alt="3 modes" />
-  <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW-FB923C" alt="Bilingual" />
+  <img src="https://img.shields.io/badge/i18n-en%20%7C%20zh--TW%20%7C%20zh--CN-FB923C" alt="Multilingual" />
 </p>
 
 > A configurable suite of **15 QA skills** for [Claude Code](https://claude.ai/code), covering the
@@ -226,7 +226,8 @@ See [docs/workflow-diagrams.md](docs/workflow-diagrams.md) for ASCII diagrams of
 - [x] ~~More presets: startup / enterprise / government~~ — done in v1.1.0
 - [x] ~~CI/CD pipeline integration templates (GitHub Actions / GitLab / CircleCI)~~ — done in v1.2.0, see [docs/ci-integration.md](docs/ci-integration.md)
 - [x] ~~Windows native support~~ — done in v1.3.0 via `.ps1` scripts, see [docs/install-windows.md](docs/install-windows.md)
-- [ ] More language support: 日本語 / 简体中文
+- [x] ~~More language support: 简体中文~~ — done in v1.4.0, see [README.zh-CN.md](README.zh-CN.md)
+- [ ] More language support: 日本語
 - [ ] Web UI for config editing
 - [ ] Skill telemetry (anonymous usage stats to improve defaults)
 

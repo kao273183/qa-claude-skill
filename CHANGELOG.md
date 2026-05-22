@@ -1,5 +1,24 @@
 # Changelog
 
+## v1.4.0 — 2026-05-22
+
+### Added
+
+- 🌐 **简体中文支援** — 新增 `README.zh-CN.md`
+  - 大陸用詞本地化（軟體 → 软件、檔案 → 文件、規格 → 规格 等）
+  - 完整對應繁中版內容（亮點 / 15 個 skill / 快速開始 / 3 種模式 / 6 個 preset / 概念入門 / 工作流 / 兼容性 / CI / Roadmap）
+  - README.md / README.zh-TW.md 頂部加 3 語言切換 link
+  - i18n badge 從 `en | zh-TW` 升級為 `en | zh-TW | zh-CN`
+
+### Removed
+
+- 🧹 **ONBOARDING.md / ONBOARDING.en.md** — 從通用 repo 移除
+  - 原因：通用 repo 保持「乾淨的通用版」原則
+  - 內部 onboarding 將另出 uniopen 專屬版本（不放這個通用 repo）
+  - 對外 onboarding 入口統一改用 README.* + INSTALL.md
+
+---
+
 ## v1.3.0 — 2026-05-22
 
 ### Added
